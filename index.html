@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Chatbot for Local Service Businesses — IncludeBrake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--s1:#111;--s2:#181818;--br:rgba(255,255,255,0.08);--brh:rgba(255,255,255,0.14);--lime:#C8F230;--ld:rgba(200,242,48,0.12);--lgg:rgba(200,242,48,0.06);--tx:#F5F5F0;--mt:rgba(245,245,240,0.5);--mt2:rgba(245,245,240,0.28);--red:#FF4444;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(8,8,8,0.88);backdrop-filter:blur(20px);border-bottom-color:var(--br);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.02em;}
+.logo span{color:var(--lime);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--mt);font-size:0.83rem;transition:color 0.2s;}
+.nav-links a:hover{color:var(--tx);}
+.nav-cta{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;padding:9px 20px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:all 0.2s;}
+.nav-cta:hover{background:#d9ff40;}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 10% 80%,rgba(200,242,48,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 15%,rgba(200,242,48,0.04) 0%,transparent 60%),var(--bg);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 100%,black 0%,transparent 80%);}
+.hero-inner{position:relative;z-index:1;}
+.eyebrow{font-family:'Syne',sans-serif;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--lime);margin-bottom:24px;opacity:0;animation:fadeUp 0.7s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3rem,7vw,6.2rem);line-height:1.0;letter-spacing:-0.04em;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero h1 .lime{color:var(--lime);}
+.hero h1 .stroke{-webkit-text-stroke:1px rgba(245,245,240,0.25);color:transparent;}
+.hero-sub{font-size:1.05rem;color:var(--mt);max-width:500px;line-height:1.7;margin-bottom:44px;opacity:0;animation:fadeUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;opacity:0;animation:slam 0.6s 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+.btn-primary{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;padding:15px 34px;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;}
+.btn-primary:hover{background:#d9ff40;transform:translateY(-2px);}
+.btn-ghost{color:var(--mt);font-size:0.85rem;display:flex;align-items:center;gap:7px;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--tx);}
+.trust-line{font-size:0.78rem;color:var(--mt2);margin-top:14px;opacity:0;animation:fadeIn 1s 0.9s ease forwards;}
+.proof-bar{padding:22px 48px;border-top:1px solid var(--br);border-bottom:1px solid var(--br);display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+.proof-stat .num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-0.03em;color:var(--lime);}
+.proof-stat .lbl{font-size:0.72rem;color:var(--mt);}
+.proof-div{width:1px;height:36px;background:var(--br);}
+section{padding:100px 48px;}
+.s-label{font-family:'Syne',sans-serif;font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;}
+.s-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-0.03em;margin-bottom:20px;}
+.s-sub{font-size:0.95rem;color:var(--mt);max-width:500px;line-height:1.75;}
+.problem{background:var(--s1);}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px;}
+.prob-list{display:flex;flex-direction:column;gap:16px;}
+.prob-item{display:flex;gap:14px;padding:18px;border:1px solid var(--br);background:var(--bg);}
+.prob-x{color:var(--red);flex-shrink:0;margin-top:2px;}
+.prob-item p{font-size:0.87rem;color:var(--mt);line-height:1.6;}
+.prob-item strong{color:var(--tx);font-weight:500;}
+.stat-box{background:var(--bg);border:1px solid var(--br);padding:36px;position:sticky;top:90px;}
+.stat-big{font-family:'Syne',sans-serif;font-weight:800;font-size:3.8rem;color:var(--lime);letter-spacing:-0.04em;line-height:1;}
+.stat-small{font-size:0.78rem;color:var(--mt);margin-top:6px;line-height:1.5;}
+.stat-div{height:1px;background:var(--br);margin:22px 0;}
+.not-fit{background:var(--s2);padding:20px 24px;border-left:2px solid var(--red);margin-top:16px;font-size:0.82rem;color:var(--mt);line-height:1.6;}
+.not-fit strong{color:var(--tx);display:block;margin-bottom:6px;}
+.offer-main{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--br);margin-top:56px;}
+.offer-card{background:var(--bg);padding:36px 32px;transition:background 0.3s;}
+.offer-card:hover{background:var(--s1);}
+.offer-card.featured{background:var(--lgg);border:1px solid rgba(200,242,48,0.18);}
+.offer-badge{display:inline-block;background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;margin-bottom:16px;}
+.offer-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:-0.01em;margin-bottom:6px;}
+.offer-price{font-family:'Syne',sans-serif;font-weight:800;font-size:2.8rem;letter-spacing:-0.04em;color:var(--lime);line-height:1;}
+.offer-pnote{font-size:0.75rem;color:var(--mt);margin-bottom:20px;}
+.offer-desc{font-size:0.84rem;color:var(--mt);line-height:1.7;margin-bottom:24px;}
+.offer-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;}
+.offer-list li{font-size:0.8rem;color:var(--mt);display:flex;gap:9px;align-items:flex-start;}
+.offer-list li::before{content:'→';color:var(--lime);flex-shrink:0;}
+.offer-link{display:inline-block;font-family:'Syne',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.04em;padding:11px 22px;border:1px solid var(--brh);color:var(--tx);transition:all 0.2s;}
+.offer-link:hover{border-color:var(--lime);color:var(--lime);}
+.offer-card.featured .offer-link{background:var(--lime);color:#000;border-color:var(--lime);}
+.offer-card.featured .offer-link:hover{background:#d9ff40;}
+.addons{margin-top:2px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--br);}
+.addon{background:var(--bg);padding:24px 22px;transition:background 0.3s;}
+.addon:hover{background:var(--s1);}
+.addon-name{font-family:'Syne',sans-serif;font-weight:600;font-size:0.85rem;margin-bottom:4px;}
+.addon-price{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;color:var(--lime);letter-spacing:-0.03em;}
+.addon-note{font-size:0.7rem;color:var(--mt);margin-bottom:10px;}
+.addon-desc{font-size:0.78rem;color:var(--mt);line-height:1.55;margin-bottom:14px;}
+.addon-link{font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;color:var(--mt2);border:1px solid var(--br);padding:8px 14px;display:inline-block;transition:all 0.2s;}
+.addon-link:hover{border-color:var(--lime);color:var(--lime);}
+.how{background:var(--s1);}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;background:var(--br);}
+.how-step{background:var(--bg);padding:36px 28px;}
+.how-num{font-family:'Syne',sans-serif;font-weight:800;font-size:3.2rem;color:rgba(200,242,48,0.14);letter-spacing:-0.05em;line-height:1;margin-bottom:20px;}
+.how-ttl{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:10px;}
+.how-desc{font-size:0.83rem;color:var(--mt);line-height:1.7;}
+.diff{position:relative;overflow:hidden;}
+.diff-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 90% 50%,rgba(200,242,48,0.05) 0%,transparent 60%);}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1;}
+.diff-quote{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.25;letter-spacing:-0.03em;}
+.diff-quote em{font-style:normal;color:var(--lime);}
+.diff-body p{font-size:0.88rem;color:var(--mt);line-height:1.75;}
+.diff-body p+p{margin-top:14px;}
+.obj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px;background:var(--br);}
+.obj-item{background:var(--bg);padding:28px 24px;}
+.obj-q{font-family:'Syne',sans-serif;font-weight:600;font-size:0.87rem;margin-bottom:10px;color:var(--mt2);}
+.obj-q::before{content:'"';color:var(--lime);}
+.obj-q::after{content:'"';}
+.obj-a{font-size:0.83rem;color:var(--mt);line-height:1.65;}
+.industries{background:var(--s1);}
+.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;background:var(--br);}
+.ind-item{background:var(--bg);padding:24px 22px;}
+.ind-type{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:4px;}
+.ind-why{font-size:0.78rem;color:var(--mt);margin-bottom:6px;line-height:1.55;}
+.ind-contact{font-size:0.7rem;color:var(--mt2);}
+.final-cta{background:var(--lime);padding:90px 48px;text-align:center;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(255,255,255,0.15) 0%,transparent 70%);}
+.final-cta-label{font-family:'Syne',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:16px;}
+.final-cta h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,5vw,4rem);letter-spacing:-0.04em;line-height:1.05;color:#000;margin-bottom:14px;}
+.final-cta .sub-p{color:rgba(0,0,0,0.55);font-size:0.95rem;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;}
+.btn-dark{background:#000;color:var(--lime);font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;padding:16px 40px;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;margin-bottom:10px;}
+.btn-dark:hover{background:#111;transform:translateY(-2px);}
+.cta-urgency{font-size:0.78rem;color:rgba(0,0,0,0.45);position:relative;}
+footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;}
+.foot-logo span{color:var(--lime);}
+.foot-links{display:flex;gap:28px;}
+.foot-links a{font-size:0.75rem;color:var(--mt2);transition:color 0.2s;}
+.foot-links a:hover{color:var(--mt);}
+.foot-legal{font-size:0.7rem;color:var(--mt2);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slam{from{opacity:0;transform:scale(0.88) translateY(16px)}to{opacity:1;transform:none}}
+[data-a]{opacity:0;transform:translateY(26px);transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.16,1,0.3,1);}
+[data-a].vis{opacity:1;transform:none;}
+[data-a][data-d="1"].vis{transition-delay:0.08s;}
+[data-a][data-d="2"].vis{transition-delay:0.16s;}
+[data-a][data-d="3"].vis{transition-delay:0.24s;}
+[data-a][data-d="4"].vis{transition-delay:0.32s;}
+@media(max-width:860px){
+  nav{padding:16px 20px;}.nav-links{display:none;}
+  .hero,.proof-bar,section,footer{padding-left:20px;padding-right:20px;}
+  .prob-grid,.diff-grid,.offer-main,.ind-grid,.how-steps,.obj-grid,.addons{grid-template-columns:1fr;}
+  .proof-bar{gap:20px;}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="logo">Include<span>Brake</span></div>
+  <ul class="nav-links">
+    <li><a href="#offers">Services</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#diff">Our Stand</a></li>
+    <li><a href="authority.html">Authority Blueprint</a></li>
+    <li><a href="tractionbuild.html">TractionBuild</a></li>
+  </ul>
+  <a href="#offers" class="nav-cta">Get Started</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">AI Automation · Spartanburg &amp; Upstate SC</p>
+    <h1>Your Business<br><span class="lime">Stays Open</span><br><span class="stroke">After Hours.</span></h1>
+    <p class="hero-sub">We build AI chat assistants for local service businesses. Customers get answers at midnight. You wake up with booked jobs.</p>
+    <div class="hero-actions">
+      <a href="#offers" class="btn-primary">See How It Works</a>
+      <a href="STRIPE_DFY" class="btn-ghost">Get Your Chatbot — $1,000 →</a>
+    </div>
+    <p class="trust-line">No website traffic? <a href="#fit" style="color:var(--lime);">Check if you're a fit first →</a></p>
+  </div>
+</section>
+
+<div class="proof-bar">
+  <div class="proof-stat"><div class="num">24/7</div><div class="lbl">Coverage</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">&lt;60 sec</div><div class="lbl">Lead Alert</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">$1,000</div><div class="lbl">Flat Build Fee</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">5–7 days</div><div class="lbl">Time to Live</div></div>
+  <div class="proof-div"></div>
+  <p style="font-size:0.8rem;color:var(--mt);max-width:260px;line-height:1.5;flex:1;">One missed lead/week at $300 avg job = $15,600/year. The bot pays for itself in under a month.</p>
+</div>
+
+<section class="problem">
+  <p class="s-label" data-a>The Problem</p>
+  <h2 class="s-title" data-a data-d="1">Your phone stops<br>working at 5pm.</h2>
+  <div class="prob-grid">
+    <div class="prob-list">
+      <div class="prob-item" data-a data-d="1"><span class="prob-x">✗</span><p><strong>Phones go unanswered after hours.</strong> Customers don't leave messages — they call your competitor next.</p></div>
+      <div class="prob-item" data-a data-d="2"><span class="prob-x">✗</span><p><strong>Your website sits silent on weekends.</strong> Visitors land, get no response, and bounce. Zero leads captured outside business hours.</p></div>
+      <div class="prob-item" data-a data-d="3"><span class="prob-x">✗</span><p><strong>You're answering the same 10 questions all day.</strong> "What are your hours?" "Do you service my area?" "How much does it cost?"</p></div>
+      <div class="prob-item" data-a data-d="4"><span class="prob-x">✗</span><p><strong>A receptionist costs $35K/year</strong> — and still can't work at 2am or cover a sick day.</p></div>
+      <div class="not-fit" data-a id="fit">
+        <strong>Not a fit? We'll say it upfront.</strong>
+        Zero website traffic, franchise/chain shops, clients wanting SEO or lead generation — we convert leads, we don't create them. If that's you, we'll refer you to someone who can help.
+      </div>
+    </div>
+    <div class="stat-box" data-a>
+      <div class="stat-big">62%</div>
+      <div class="stat-small">of customers expect a response within the first hour of contact.</div>
+      <div class="stat-div"></div>
+      <div class="stat-big">$15.6K</div>
+      <div class="stat-small">average annual revenue lost by a service business from missed after-hours leads.</div>
+      <div class="stat-div"></div>
+      <div class="stat-big">$10–30</div>
+      <div class="stat-small">/month ongoing tool costs after setup. No per-conversation charges, no platform markup.</div>
+    </div>
+  </div>
+</section>
+
+<section id="offers">
+  <p class="s-label" data-a>What We Build</p>
+  <h2 class="s-title" data-a data-d="1">Two builds. Three add-ons.</h2>
+  <p class="s-sub" data-a data-d="2">Start with the chatbot. Add the voicebot if you need to answer phones too.</p>
+  <div data-a>
+    <div class="offer-main">
+      <div class="offer-card featured">
+        <span class="offer-badge">Most Common</span>
+        <div class="offer-name">Starter Automation — Web Chatbot</div>
+        <div class="offer-price">$1,000</div>
+        <div class="offer-pnote">One-time · 5–7 business days</div>
+        <p class="offer-desc">Custom AI chatbot embedded on your site, trained on your services, hours, and FAQs. Handles after-hours questions, captures leads, and sends booking links automatically.</p>
+        <ul class="offer-list">
+          <li>Built with Typebot + GPT-4o-mini (not a plugin)</li>
+          <li>Trained on your actual business info</li>
+          <li>Lead capture: name + phone + booking prompt</li>
+          <li>Cal.com booking integration</li>
+          <li>14-day post-launch support included</li>
+        </ul>
+        <a href="STRIPE_DFY" class="offer-link">Get My Chatbot Built →</a>
+      </div>
+      <div class="offer-card">
+        <span class="offer-badge">Full Stack</span>
+        <div class="offer-name">Voicebot Extension</div>
+        <div class="offer-price">$2,500+</div>
+        <div class="offer-pnote">One-time · Custom quote based on call volume</div>
+        <p class="offer-desc">Everything in Starter PLUS a phone voicebot via Twilio + Vapi.ai — your AI answers inbound calls 24/7, handles FAQs, and transfers to you when a human is needed.</p>
+        <ul class="offer-list">
+          <li>Everything in Starter Automation</li>
+          <li>Phone voicebot via Vapi.ai</li>
+          <li>Twilio phone number setup</li>
+          <li>Call transfer to your real number on request</li>
+        </ul>
+        <a href="STRIPE_VOICE" class="offer-link">Get a Custom Quote →</a>
+      </div>
+    </div>
+    <div class="addons">
+      <div class="addon">
+        <div class="addon-name">Real-Time Lead Alerts</div>
+        <div class="addon-price">$300</div>
+        <div class="addon-note">One-time add-on</div>
+        <p class="addon-desc">SMS/email fires within 60 seconds of every lead capture. Wake up knowing, not wondering.</p>
+        <a href="STRIPE_ALERT" class="addon-link">Add Lead Alerts →</a>
+      </div>
+      <div class="addon">
+        <div class="addon-name">Daily Lead Brief</div>
+        <div class="addon-price">$200</div>
+        <div class="addon-note">One-time add-on</div>
+        <p class="addon-desc">Automated 7am digest of everything your chatbot captured the previous day.</p>
+        <a href="STRIPE_BRIEF" class="addon-link">Add Daily Brief →</a>
+      </div>
+      <div class="addon">
+        <div class="addon-name">Both Lead Packages</div>
+        <div class="addon-price">$400</div>
+        <div class="addon-note">One-time add-on · Save $100</div>
+        <p class="addon-desc">Real-time alerts AND the daily brief. Full visibility on every lead, immediate and overnight.</p>
+        <a href="STRIPE_BUNDLE" class="addon-link">Get Both →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <p class="s-label" data-a>The Process</p>
+  <h2 class="s-title" data-a data-d="1">Live in 5–7 days.<br>You do one thing.</h2>
+  <div class="how-steps">
+    <div class="how-step" data-a data-d="1"><div class="how-num">01</div><div class="how-ttl">Tell Us About Your Business</div><p class="how-desc">Quick intake form: services, hours, FAQs, what a good lead looks like. Takes 10 minutes. That's your job — everything after is ours.</p></div>
+    <div class="how-step" data-a data-d="2"><div class="how-num">02</div><div class="how-ttl">We Build It in 3 Days</div><p class="how-desc">We build your AI assistant, test every path against real customer inputs, and send you a Loom demo. You see it before it goes live.</p></div>
+    <div class="how-step" data-a data-d="3"><div class="how-num">03</div><div class="how-ttl">It Goes Live — You Touch Nothing</div><p class="how-desc">One line of code on your site. Your assistant starts answering customers immediately. 14-day support window for tweaks.</p></div>
+  </div>
+</section>
+
+<section class="diff" id="diff">
+  <div class="diff-bg"></div>
+  <div class="diff-grid">
+    <div data-a>
+      <p class="s-label">Our Stand</p>
+      <blockquote class="diff-quote">"We don't automate people out of jobs.<br><em>We automate the repetitive</em><br>so your team can do the human work."</blockquote>
+    </div>
+    <div class="diff-body" data-a data-d="1">
+      <p>Every IncludeBrake deployment is designed to reposition your team — not replace them. Your receptionist stops answering "what are your hours?" for the 40th time this week and starts doing the work that actually moves the business forward.</p>
+      <p>AI handles overflow, after-hours, and repetition. Humans handle relationships, judgment, and jobs that require a real person. That's not a threat — it's an upgrade to what your team's time is worth.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--s1);">
+  <p class="s-label" data-a>FAQ</p>
+  <h2 class="s-title" data-a data-d="1">Every objection.<br>Answered straight.</h2>
+  <div class="obj-grid">
+    <div class="obj-item" data-a data-d="1"><p class="obj-q">Will this replace my receptionist?</p><p class="obj-a">No. The bot handles after-hours and overflow — your receptionist still owns relationships and complex calls. We're adding a second shift, not eliminating the first.</p></div>
+    <div class="obj-item" data-a data-d="2"><p class="obj-q">What if the bot gives wrong information?</p><p class="obj-a">It only answers from the knowledge base we build together. Anything outside that scope gets escalated to you. It cannot fabricate answers.</p></div>
+    <div class="obj-item" data-a data-d="3"><p class="obj-q">Will customers know it's AI?</p><p class="obj-a">Your call. We can make it transparent ("I'm an AI assistant") or natural ("Hi, I'm here to help"). We set it up the way that fits your business.</p></div>
+    <div class="obj-item" data-a data-d="4"><p class="obj-q">What does it cost to run after setup?</p><p class="obj-a">Roughly $10–30/month in tool costs depending on your traffic. We walk you through that at handoff. No per-conversation charges, no markup.</p></div>
+    <div class="obj-item" data-a data-d="1"><p class="obj-q">What's my ROI?</p><p class="obj-a">One missed lead/week at a $300 average job = $15,600/year. The bot pays for itself in under a month — before counting improved customer experience.</p></div>
+    <div class="obj-item" data-a data-d="2"><p class="obj-q">Do I need to be technical?</p><p class="obj-a">Zero. We handle everything. Your web person pastes one line of code. That's the full ask.</p></div>
+  </div>
+</section>
+
+<section class="industries" id="industries">
+  <p class="s-label" data-a>Who It's For</p>
+  <h2 class="s-title" data-a data-d="1">Service businesses<br>with phones and a website.</h2>
+  <div class="ind-grid">
+    <div class="ind-item" data-a data-d="1"><div class="ind-type">HVAC</div><p class="ind-why">High quote volume + emergency service = high after-hours need. Every midnight call missed is a job that goes to a competitor.</p><p class="ind-contact">Best contact: walk-in or phone</p></div>
+    <div class="ind-item" data-a data-d="2"><div class="ind-type">Hair &amp; Beauty Salons</div><p class="ind-why">Appointment-based, owner-operated. Handles new client questions and booking prompts overnight so you sleep without missing signups.</p><p class="ind-contact">Best contact: DM or text</p></div>
+    <div class="ind-item" data-a data-d="3"><div class="ind-type">Auto Repair Shops</div><p class="ind-why">Family-owned shops only (not franchises). Quote requests, service questions, drop-off scheduling — all capturable after hours.</p><p class="ind-contact">Best contact: walk-in or phone</p></div>
+    <div class="ind-item" data-a data-d="1"><div class="ind-type">Pest Control</div><p class="ind-why">Seasonal urgency spikes mean leads arrive unpredictably. The bot captures them at 11pm just as well as 11am.</p><p class="ind-contact">Best contact: phone or email</p></div>
+    <div class="ind-item" data-a data-d="2"><div class="ind-type">Dental Practices</div><p class="ind-why">Independent practices only. New patient intake is the use case — capture interest before they find another dentist.</p><p class="ind-contact">Best contact: email to front desk</p></div>
+    <div class="ind-item" data-a data-d="3"><div class="ind-type">Chiropractors</div><p class="ind-why">Appointment-heavy, recurring patients, admin-lean offices. Books follow-ups and captures new patient inquiries without adding staff.</p><p class="ind-contact">Best contact: email or phone</p></div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <p class="final-cta-label">Ready?</p>
+  <h2>Stop losing leads tonight.</h2>
+  <p class="sub-p">Get your AI chatbot built and live in under a week. You fill out one form. We handle everything else. Build starts as soon as payment clears.</p>
+  <a href="STRIPE_DFY" class="btn-dark">Get My Chatbot Built — $1,000</a>
+  <p class="cta-urgency">You'll hear from us within 24 hours of payment.</p>
+</section>
+
+<footer>
+  <div class="foot-logo">Include<span>Brake</span></div>
+  <div class="foot-links"><a href="authority.html">Authority Blueprint</a><a href="tractionbuild.html">TractionBuild</a></div>
+  <p class="foot-legal">© 2026 IncludeBrake · Chesnee, SC</p>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

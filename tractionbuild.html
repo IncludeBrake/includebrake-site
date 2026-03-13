@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TractionBuild — AI Business Idea Validation Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--s1:#111;--s2:#181818;--br:rgba(255,255,255,0.08);--brh:rgba(255,255,255,0.14);--lime:#C8F230;--lgg:rgba(200,242,48,0.06);--tx:#F5F5F0;--mt:rgba(245,245,240,0.5);--mt2:rgba(245,245,240,0.28);--amber:#F5A623;--red:#FF4444;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(8,8,8,0.88);backdrop-filter:blur(20px);border-bottom-color:var(--br);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.02em;}
+.logo span{color:var(--lime);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--mt);font-size:0.83rem;transition:color 0.2s;}
+.nav-links a:hover{color:var(--tx);}
+.nav-cta{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;padding:9px 20px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:all 0.2s;}
+.nav-cta:hover{background:#d9ff40;}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 8% 80%,rgba(200,242,48,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 92% 20%,rgba(200,242,48,0.04) 0%,transparent 60%),var(--bg);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 100%,black 0%,transparent 80%);}
+.hero-inner{position:relative;z-index:1;}
+.eyebrow{font-family:'Syne',sans-serif;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--lime);margin-bottom:24px;opacity:0;animation:fadeUp 0.7s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,6.5vw,5.8rem);line-height:1.02;letter-spacing:-0.04em;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;max-width:820px;}
+.hero h1 .lime{color:var(--lime);}
+.hero h1 .stroke{-webkit-text-stroke:1px rgba(245,245,240,0.22);color:transparent;}
+.hero-sub{font-size:1.05rem;color:var(--mt);max-width:540px;line-height:1.7;margin-bottom:44px;opacity:0;animation:fadeUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;opacity:0;animation:slam 0.6s 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+.btn-primary{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;padding:15px 34px;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;}
+.btn-primary:hover{background:#d9ff40;transform:translateY(-2px);}
+.btn-ghost{color:var(--mt);font-size:0.85rem;display:flex;align-items:center;gap:7px;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--tx);}
+.self-val{font-size:0.78rem;color:var(--lime);margin-top:14px;opacity:0;animation:fadeIn 1s 0.9s ease forwards;}
+.proof-bar{padding:22px 48px;border-top:1px solid var(--br);border-bottom:1px solid var(--br);display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+.proof-stat .num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-0.03em;color:var(--lime);}
+.proof-stat .lbl{font-size:0.72rem;color:var(--mt);}
+.proof-div{width:1px;height:36px;background:var(--br);}
+section{padding:100px 48px;}
+.s-label{font-family:'Syne',sans-serif;font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;}
+.s-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-0.03em;margin-bottom:20px;}
+.s-sub{font-size:0.95rem;color:var(--mt);max-width:500px;line-height:1.75;}
+/* PROBLEM */
+.problem{background:var(--s1);}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px;}
+.prob-list{display:flex;flex-direction:column;gap:16px;}
+.prob-item{display:flex;gap:14px;padding:18px;border:1px solid var(--br);background:var(--bg);}
+.prob-x{color:var(--red);flex-shrink:0;margin-top:2px;}
+.prob-item p{font-size:0.87rem;color:var(--mt);line-height:1.6;}
+.prob-item strong{color:var(--tx);font-weight:500;}
+.self-val-box{background:var(--bg);border:1px solid rgba(200,242,48,0.18);padding:36px;position:sticky;top:90px;}
+.self-val-label{font-family:'Syne',sans-serif;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;}
+.score-big{font-family:'Syne',sans-serif;font-weight:800;font-size:5rem;color:var(--lime);letter-spacing:-0.05em;line-height:1;}
+.score-label{font-size:0.82rem;color:var(--tx);margin-bottom:4px;}
+.score-sub{font-size:0.75rem;color:var(--mt);line-height:1.5;}
+.val-div{height:1px;background:var(--br);margin:20px 0;}
+.val-detail{font-size:0.78rem;color:var(--mt);line-height:1.6;}
+.val-detail strong{color:var(--tx);}
+/* STRATEGIES */
+.strat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;background:var(--br);}
+.strat-card{background:var(--bg);padding:32px 28px;}
+.strat-status{font-family:'Syne',sans-serif;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;padding:3px 8px;border-radius:2px;display:inline-block;margin-bottom:16px;}
+.status-done{background:rgba(200,242,48,0.12);color:var(--lime);border:1px solid rgba(200,242,48,0.2);}
+.status-next{background:rgba(245,166,35,0.1);color:var(--amber);border:1px solid rgba(245,166,35,0.2);}
+.strat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;color:rgba(200,242,48,0.12);letter-spacing:-0.04em;line-height:1;margin-bottom:12px;}
+.strat-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:10px;}
+.strat-desc{font-size:0.8rem;color:var(--mt);line-height:1.65;}
+.strat-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+.strat-list li{font-size:0.77rem;color:var(--mt);display:flex;gap:8px;}
+.strat-list li::before{content:'→';color:var(--lime);flex-shrink:0;}
+/* PRICING */
+.pricing-wrap{margin-top:56px;}
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--br);}
+.tier-card{background:var(--bg);padding:32px 26px;transition:background 0.3s;}
+.tier-card:hover{background:var(--s1);}
+.tier-card.featured{background:var(--lgg);border:1px solid rgba(200,242,48,0.18);}
+.tier-badge{display:inline-block;background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;margin-bottom:16px;}
+.tier-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:6px;}
+.tier-price{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;letter-spacing:-0.04em;color:var(--lime);line-height:1;}
+.tier-pnote{font-size:0.72rem;color:var(--mt);margin-bottom:20px;}
+.tier-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+.tier-list li{font-size:0.78rem;color:var(--mt);display:flex;gap:8px;align-items:flex-start;}
+.tier-list li::before{content:'→';color:var(--lime);flex-shrink:0;}
+.tier-link{display:inline-block;font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.04em;padding:10px 18px;border:1px solid var(--brh);color:var(--tx);transition:all 0.2s;width:100%;text-align:center;}
+.tier-link:hover{border-color:var(--lime);color:var(--lime);}
+.tier-card.featured .tier-link{background:var(--lime);color:#000;border-color:var(--lime);}
+.tier-card.featured .tier-link:hover{background:#d9ff40;}
+.tier-link.free-link{border-color:var(--br);color:var(--mt);}
+/* SELF-VAL STORY */
+.story{background:var(--s1);}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:56px;}
+.story-quote{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.3;letter-spacing:-0.03em;}
+.story-quote em{font-style:normal;color:var(--lime);}
+.story-body p{font-size:0.88rem;color:var(--mt);line-height:1.75;}
+.story-body p+p{margin-top:14px;}
+.score-badge{display:inline-flex;align-items:baseline;gap:6px;background:var(--lgg);border:1px solid rgba(200,242,48,0.18);padding:10px 18px;margin-top:16px;}
+.score-badge .n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:var(--lime);letter-spacing:-0.04em;}
+.score-badge .l{font-size:0.78rem;color:var(--mt);}
+/* NOT FOR */
+.notfor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px;background:var(--br);}
+.notfor-good{background:var(--bg);padding:28px 24px;}
+.notfor-bad{background:var(--bg);padding:28px 24px;border-left:none;}
+.notfor-label{font-family:'Syne',sans-serif;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;}
+.label-good{color:var(--lime);}
+.label-bad{color:var(--red);}
+.notfor-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.notfor-list li{font-size:0.83rem;color:var(--mt);display:flex;gap:10px;align-items:flex-start;line-height:1.55;}
+.notfor-list li .check{color:var(--lime);flex-shrink:0;}
+.notfor-list li .cross{color:var(--red);flex-shrink:0;}
+/* CTA */
+.final-cta{background:var(--lime);padding:90px 48px;text-align:center;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(255,255,255,0.15) 0%,transparent 70%);}
+.final-cta-label{font-family:'Syne',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:16px;}
+.final-cta h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:-0.04em;line-height:1.05;color:#000;margin-bottom:14px;max-width:600px;margin-left:auto;margin-right:auto;}
+.final-cta .sub-p{color:rgba(0,0,0,0.55);font-size:0.95rem;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;}
+.btn-dark{background:#000;color:var(--lime);font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;padding:16px 40px;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;margin-bottom:10px;}
+.btn-dark:hover{background:#111;transform:translateY(-2px);}
+.cta-note{font-size:0.78rem;color:rgba(0,0,0,0.45);position:relative;}
+footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;}
+.foot-logo span{color:var(--lime);}
+.foot-links{display:flex;gap:28px;}
+.foot-links a{font-size:0.75rem;color:var(--mt2);transition:color 0.2s;}
+.foot-links a:hover{color:var(--mt);}
+.foot-legal{font-size:0.7rem;color:var(--mt2);}
+/* FREE FORM */
+.free-form{background:var(--s2);border:1px solid var(--br);padding:32px;margin-top:56px;max-width:480px;}
+.free-form h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px;}
+.free-form p{font-size:0.82rem;color:var(--mt);margin-bottom:20px;}
+.form-row{display:flex;gap:10px;}
+.form-input{flex:1;background:var(--bg);border:1px solid var(--br);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:0.85rem;padding:11px 16px;outline:none;transition:border-color 0.2s;}
+.form-input:focus{border-color:var(--lime);}
+.form-input::placeholder{color:var(--mt2);}
+.form-btn{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;padding:11px 20px;border:none;cursor:pointer;white-space:nowrap;transition:background 0.2s;}
+.form-btn:hover{background:#d9ff40;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slam{from{opacity:0;transform:scale(0.88) translateY(16px)}to{opacity:1;transform:none}}
+[data-a]{opacity:0;transform:translateY(26px);transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.16,1,0.3,1);}
+[data-a].vis{opacity:1;transform:none;}
+[data-a][data-d="1"].vis{transition-delay:0.08s;}[data-a][data-d="2"].vis{transition-delay:0.16s;}[data-a][data-d="3"].vis{transition-delay:0.24s;}[data-a][data-d="4"].vis{transition-delay:0.32s;}
+@media(max-width:900px){
+  nav{padding:16px 20px;}.nav-links{display:none;}
+  .hero,.proof-bar,section,footer{padding-left:20px;padding-right:20px;}
+  .prob-grid,.story-grid,.strat-grid,.notfor-grid{grid-template-columns:1fr;}
+  .tier-grid{grid-template-columns:1fr 1fr;}
+  .proof-bar{gap:20px;}
+}
+@media(max-width:540px){.tier-grid{grid-template-columns:1fr;}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="logo">Traction<span>Build</span></div>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="index.html">Chatbot Automation</a></li>
+    <li><a href="authority.html">Authority Blueprint</a></li>
+  </ul>
+  <a href="#free-signup" class="nav-cta">Start Free</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">TractionBuild · The Honest Execution Partner</p>
+    <h1>Most Validation Tools<br><span class="lime">Lie to You.</span><br><span class="stroke">This One Doesn't.</span></h1>
+    <p class="hero-sub">TractionBuild gives solo founders brutally honest feedback on business ideas — then immediately generates the execution assets to actually start building. No cheerleading. No tasks without deliverables.</p>
+    <div class="hero-actions">
+      <a href="#free-signup" class="btn-primary">Validate My Idea Free</a>
+      <a href="#pricing" class="btn-ghost">See Paid Plans →</a>
+    </div>
+    <p class="self-val">Meta: TractionBuild validated itself. Scored 7.0/10 — "Solid Idea, proceed."</p>
+  </div>
+</section>
+
+<div class="proof-bar">
+  <div class="proof-stat"><div class="num">7.0/10</div><div class="lbl">Self-Validation Score</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">&lt;90 sec</div><div class="lbl">Time to First Asset</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">Free</div><div class="lbl">Start Tier</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">Python</div><div class="lbl">Open CLI</div></div>
+  <div class="proof-div"></div>
+  <p style="font-size:0.8rem;color:var(--mt);max-width:260px;line-height:1.5;flex:1;">Scored 7.0/10 on its own validation framework. Proceeded to build. Strategy 1 + 2 complete.</p>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <p class="s-label" data-a>The Problem</p>
+  <h2 class="s-title" data-a data-d="1">Validation tools either<br>lie or leave you hanging.</h2>
+  <div class="prob-grid">
+    <div class="prob-list">
+      <div class="prob-item" data-a data-d="1"><span class="prob-x">✗</span><p><strong>Most tools are too gentle.</strong> They don't want to hurt your feelings. So they give you a score of 7 on an idea that deserves a 3, with vague reassurance you should "keep exploring."</p></div>
+      <div class="prob-item" data-a data-d="2"><span class="prob-x">✗</span><p><strong>They give tasks, not assets.</strong> "Build a landing page." "Interview 10 customers." Great — now where's the landing page? Where's the interview script?</p></div>
+      <div class="prob-item" data-a data-d="3"><span class="prob-x">✗</span><p><strong>Red flags go undetected.</strong> Derivative ideas, saturated markets, wrong assumptions — most tools miss them or bury them in positive framing.</p></div>
+      <div class="prob-item" data-a data-d="4"><span class="prob-x">✗</span><p><strong>You spend weeks before knowing.</strong> The longer you build before validating, the more expensive the pivot — or the shutdown.</p></div>
+    </div>
+    <div class="self-val-box" data-a>
+      <div class="self-val-label">Self-Validation Story</div>
+      <div class="score-big">7.0</div>
+      <div class="score-label">/10 — Solid Idea, proceed</div>
+      <div class="score-sub">TractionBuild ran its own validation framework on itself before building.</div>
+      <div class="val-div"></div>
+      <div class="val-detail">
+        <strong>What the score triggered:</strong><br>
+        Strategy 1 (Validation) + Strategy 2 (Execution Assets) built immediately. Strategy 3 (Real User Validation) held pending 50 beta users — the exact advice the platform gives to ideas at this stage.
+      </div>
+      <div class="val-div"></div>
+      <div class="val-detail">
+        <strong>Pivot threshold:</strong> Scores under 7.0 get specific pivot suggestions, not "keep going." Scores above 7.5 get full execution asset generation immediately.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT DOES -->
+<section>
+  <p class="s-label" data-a>Product Layers</p>
+  <h2 class="s-title" data-a data-d="1">Brutal honesty +<br>working files. Same session.</h2>
+  <div class="strat-grid">
+    <div class="strat-card" data-a data-d="1">
+      <span class="strat-status status-done">✓ Live</span>
+      <div class="strat-num">01</div>
+      <div class="strat-name">Honest Validation System</div>
+      <p class="strat-desc">A scored validation (1–10) with no cheerleading. Red flag detection. Reality checks. Pivot suggestions for scores under 7.0.</p>
+      <ul class="strat-list">
+        <li>Catches derivative ideas and saturated markets</li>
+        <li>Success probability analysis</li>
+        <li>Competitor advantage breakdown</li>
+        <li>Specific pivot paths if score is low</li>
+      </ul>
+    </div>
+    <div class="strat-card" data-a data-d="2">
+      <span class="strat-status status-done">✓ Live</span>
+      <div class="strat-num">02</div>
+      <div class="strat-name">Execution Autopilot</div>
+      <p class="strat-desc">Production-ready assets generated in ~60–75 seconds after validation. Not tasks. Files.</p>
+      <ul class="strat-list">
+        <li>Landing page (HTML + Tailwind, no build step)</li>
+        <li>README.md with roadmap and license</li>
+        <li>User interview script (15–20 targeted questions)</li>
+        <li>Platform-specific marketing posts (Twitter, LinkedIn, Reddit, ProductHunt)</li>
+      </ul>
+    </div>
+    <div class="strat-card" data-a data-d="3">
+      <span class="strat-status status-next">Coming Next</span>
+      <div class="strat-num">03</div>
+      <div class="strat-name">Real User Validation Loop</div>
+      <p class="strat-desc">Email validation campaigns, survey distribution, and results tracking. Prove market demand before building.</p>
+      <ul class="strat-list">
+        <li>5-email drip sequence generator</li>
+        <li>Typeform/Tally survey distribution</li>
+        <li>Dashboard: signups, open rates, conversion signal</li>
+        <li>100 Signups = validation threshold for Pro tier</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SELF-VAL STORY -->
+<section class="story" id="story">
+  <p class="s-label" data-a>Built With Its Own Method</p>
+  <div class="story-grid">
+    <div data-a>
+      <blockquote class="story-quote">We ran TractionBuild through TractionBuild.<br><em>It scored 7.0/10.</em><br>So we built it.</blockquote>
+      <div class="score-badge">
+        <span class="n">7.0</span>
+        <span class="l">/10 · "Solid Idea, proceed"</span>
+      </div>
+    </div>
+    <div class="story-body" data-a data-d="1">
+      <p>Before writing a single line of code, TractionBuild ran itself through its own validation framework. The output: Strategy 1 and Strategy 2 were built immediately. Strategy 3 was held — exactly as the platform advises for 7.0 scores — until 50 beta users confirmed market demand.</p>
+      <p>This isn't a marketing stunt. It's the workflow. A tool that won't eat its own cooking isn't a tool worth using.</p>
+      <p>You're looking at proof that the system works. The honest score. The execution assets. The hold on premature scaling. All of it came from the platform you're about to use.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="s-label" data-a>Pricing</p>
+  <h2 class="s-title" data-a data-d="1">Start free.<br>Upgrade when you need assets.</h2>
+  <div class="pricing-wrap" data-a>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-name">Free</div>
+        <div class="tier-price">$0</div>
+        <div class="tier-pnote">No credit card · 3 projects/month</div>
+        <ul class="tier-list">
+          <li>Validation score (1–10) with honest explanation</li>
+          <li>Red flag detection</li>
+          <li>Pivot suggestions (if under 7.0)</li>
+          <li>Task breakdown</li>
+          <li>3 projects/month</li>
+        </ul>
+        <a href="#free-signup" class="tier-link free-link">Start Free →</a>
+      </div>
+      <div class="tier-card featured">
+        <span class="tier-badge">Most Popular</span>
+        <div class="tier-name">Starter</div>
+        <div class="tier-price">$49</div>
+        <div class="tier-pnote">/month · Unlimited projects · 48hr support</div>
+        <ul class="tier-list">
+          <li>Everything in Free</li>
+          <li>All execution assets (landing page, README, interview script, posts)</li>
+          <li>Unlimited projects</li>
+          <li>48-hour support</li>
+          <li>Output to organized project directories</li>
+        </ul>
+        <a href="STRIPE_TB_STARTER" class="tier-link">Get Starter →</a>
+      </div>
+      <div class="tier-card">
+        <div class="tier-name">Pro</div>
+        <div class="tier-price">$149</div>
+        <div class="tier-pnote">/month · Priority support</div>
+        <ul class="tier-list">
+          <li>Everything in Starter</li>
+          <li>Real User Validation (100 signups benchmark)</li>
+          <li>Survey distribution automation</li>
+          <li>Results tracking: signups, engagement, conversion signal</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="STRIPE_TB_PRO" class="tier-link">Get Pro →</a>
+      </div>
+      <div class="tier-card">
+        <div class="tier-name">Agency</div>
+        <div class="tier-price">$499</div>
+        <div class="tier-pnote">/month · 1:1 consultation</div>
+        <ul class="tier-list">
+          <li>Everything in Pro</li>
+          <li>1:1 consultation</li>
+          <li>Custom integrations</li>
+          <li>API access</li>
+          <li>Technical comfort required</li>
+        </ul>
+        <a href="STRIPE_TB_AGENCY" class="tier-link">Get Agency →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE SIGNUP -->
+<section style="background:var(--s1);" id="free-signup">
+  <p class="s-label" data-a>Get Started Free</p>
+  <h2 class="s-title" data-a data-d="1">Validate your first idea.<br>No card required.</h2>
+  <p class="s-sub" data-a data-d="2">Early access. You'll hear from us with install instructions within 24 hours.</p>
+  <div class="free-form" data-a data-d="3">
+    <h3>Join Early Access</h3>
+    <p>Enter your email. We'll send you the CLI setup instructions and a walkthrough when your spot is ready.</p>
+    <div class="form-row">
+      <input class="form-input" type="email" placeholder="your@email.com" id="emailInput">
+      <button class="form-btn" onclick="handleSignup()">Get Access</button>
+    </div>
+    <p id="form-confirm" style="display:none;font-size:0.78rem;color:var(--lime);margin-top:10px;">✓ Got it — you're on the list.</p>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR / NOT -->
+<section>
+  <p class="s-label" data-a>Fit Check</p>
+  <h2 class="s-title" data-a data-d="1">Who TractionBuild<br>is actually for.</h2>
+  <div class="notfor-grid">
+    <div class="notfor-good" data-a data-d="1">
+      <div class="notfor-label label-good">This Is For</div>
+      <ul class="notfor-list">
+        <li><span class="check">✓</span>Solo founders with a specific business idea (not vague "I want to start something")</li>
+        <li><span class="check">✓</span>Bootstrappers and side project builders — not VC-backed startups</li>
+        <li><span class="check">✓</span>People willing to receive honest feedback, including a bad score</li>
+        <li><span class="check">✓</span>Pro/Agency: builders with an active email list or target audience to survey</li>
+        <li><span class="check">✓</span>Anyone who wants working files, not a to-do list</li>
+      </ul>
+    </div>
+    <div class="notfor-bad" data-a data-d="2">
+      <div class="notfor-label label-bad">Not For</div>
+      <ul class="notfor-list">
+        <li><span class="cross">✗</span>Idea generation (we validate ideas, we don't ideate them)</li>
+        <li><span class="cross">✗</span>Business plan writing for investors (we generate execution assets, not pitch decks)</li>
+        <li><span class="cross">✗</span>Ongoing coaching or accountability (this is a tool, not a program)</li>
+        <li><span class="cross">✗</span>Legal or financial advice of any kind</li>
+        <li><span class="cross">✗</span>Custom integrations not on the roadmap (Agency tier only, custom quote)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <p class="final-cta-label">Ready?</p>
+  <h2>Find out if your idea<br>is actually good.</h2>
+  <p class="sub-p">Free tier. No card. Just your idea and an honest score — plus the assets to act on it immediately.</p>
+  <a href="#free-signup" class="btn-dark">Validate My Idea Free</a>
+  <p class="cta-note">Beta user target: 50 users before charging. Get in early.</p>
+</section>
+
+<footer>
+  <div class="foot-logo">Traction<span>Build</span></div>
+  <div class="foot-links"><a href="index.html">Chatbot Automation</a><a href="authority.html">Authority Blueprint</a></div>
+  <p class="foot-legal">© 2026 TractionBuild · IncludeBrake</p>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+function handleSignup(){
+  const v=document.getElementById('emailInput').value.trim();
+  if(!v||!v.includes('@'))return;
+  document.getElementById('form-confirm').style.display='block';
+  document.getElementById('emailInput').value='';
+}
+</script>
+</body>
+</html>

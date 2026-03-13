@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/authority",    "destination": "/authority.html"    },
+    { "source": "/validate",     "destination": "/tractionbuild.html" },
+    { "source": "/tractionbuild","destination": "/tractionbuild.html" }
+  ]
+}

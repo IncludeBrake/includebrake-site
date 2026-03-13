@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90-Day Authority Blueprint — Ghostwriting Day Rate · IncludeBrake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--s1:#111;--s2:#181818;--br:rgba(255,255,255,0.08);--brh:rgba(255,255,255,0.14);--lime:#C8F230;--lgg:rgba(200,242,48,0.06);--tx:#F5F5F0;--mt:rgba(245,245,240,0.5);--mt2:rgba(245,245,240,0.28);--amber:#F5A623;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(8,8,8,0.88);backdrop-filter:blur(20px);border-bottom-color:var(--br);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.02em;}
+.logo span{color:var(--lime);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--mt);font-size:0.83rem;transition:color 0.2s;}
+.nav-links a:hover{color:var(--tx);}
+.nav-cta{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;padding:9px 20px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:all 0.2s;}
+.nav-cta:hover{background:#d9ff40;}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 5% 85%,rgba(200,242,48,0.06) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 95% 10%,rgba(245,166,35,0.05) 0%,transparent 60%),var(--bg);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 100%,black 0%,transparent 80%);}
+.hero-inner{position:relative;z-index:1;}
+.eyebrow{font-family:'Syne',sans-serif;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--lime);margin-bottom:24px;opacity:0;animation:fadeUp 0.7s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.6rem,6vw,5.5rem);line-height:1.02;letter-spacing:-0.04em;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;max-width:800px;}
+.hero h1 .lime{color:var(--lime);}
+.hero-sub{font-size:1.05rem;color:var(--mt);max-width:560px;line-height:1.7;margin-bottom:44px;opacity:0;animation:fadeUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;opacity:0;animation:slam 0.6s 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+.btn-primary{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;padding:15px 34px;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;}
+.btn-primary:hover{background:#d9ff40;transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--tx);font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;padding:14px 28px;border:1px solid var(--brh);display:inline-block;transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--lime);color:var(--lime);}
+.scarcity{font-size:0.78rem;color:var(--amber);margin-top:16px;opacity:0;animation:fadeIn 1s 0.9s ease forwards;}
+.proof-bar{padding:22px 48px;border-top:1px solid var(--br);border-bottom:1px solid var(--br);display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+.proof-stat .num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-0.03em;color:var(--lime);}
+.proof-stat .lbl{font-size:0.72rem;color:var(--mt);}
+.proof-div{width:1px;height:36px;background:var(--br);}
+section{padding:100px 48px;}
+.s-label{font-family:'Syne',sans-serif;font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;}
+.s-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-0.03em;margin-bottom:20px;}
+.s-sub{font-size:0.95rem;color:var(--mt);max-width:500px;line-height:1.75;}
+/* DELIVERABLES */
+.deliv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;background:var(--br);}
+.deliv-item{background:var(--s1);padding:28px 24px;}
+.deliv-icon{font-size:1.4rem;margin-bottom:12px;}
+.deliv-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:6px;}
+.deliv-desc{font-size:0.78rem;color:var(--mt);line-height:1.55;}
+.deliv-highlight{background:var(--lgg);border:1px solid rgba(200,242,48,0.18);}
+/* AVATAR */
+.avatar-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px;}
+.signal-list{display:flex;flex-direction:column;gap:12px;}
+.signal-item{display:flex;gap:12px;align-items:flex-start;padding:16px;border:1px solid var(--br);background:var(--bg);}
+.signal-check{color:var(--lime);flex-shrink:0;margin-top:2px;}
+.signal-item p{font-size:0.85rem;color:var(--mt);line-height:1.5;}
+.signal-item strong{color:var(--tx);font-weight:500;}
+.not-for{background:var(--s2);padding:24px;border-left:2px solid var(--mt2);margin-top:20px;}
+.not-for strong{color:var(--tx);font-size:0.82rem;display:block;margin-bottom:8px;}
+.not-for ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.not-for li{font-size:0.8rem;color:var(--mt2);}
+.not-for li::before{content:'— ';}
+.value-box{background:var(--bg);border:1px solid var(--br);padding:36px;position:sticky;top:90px;}
+.value-big{font-family:'Syne',sans-serif;font-weight:800;font-size:3.2rem;color:var(--lime);letter-spacing:-0.04em;line-height:1;}
+.value-sub{font-size:0.78rem;color:var(--mt);margin-top:6px;line-height:1.5;}
+.value-div{height:1px;background:var(--br);margin:20px 0;}
+/* PROCESS */
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px;background:var(--br);}
+.how-item{background:var(--bg);padding:28px 24px;}
+.how-hour{font-family:'Syne',sans-serif;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime);margin-bottom:8px;}
+.how-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:8px;}
+.how-desc{font-size:0.8rem;color:var(--mt);line-height:1.6;}
+/* OFFERS */
+.offers-grid{display:grid;grid-template-columns:2fr 1fr;gap:2px;margin-top:56px;background:var(--br);}
+.offer-card{background:var(--bg);padding:40px 36px;transition:background 0.3s;}
+.offer-card.featured{background:var(--lgg);border:1px solid rgba(200,242,48,0.18);}
+.offer-badge{display:inline-block;background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;margin-bottom:16px;}
+.offer-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:6px;}
+.offer-price{font-family:'Syne',sans-serif;font-weight:800;font-size:2.8rem;letter-spacing:-0.04em;color:var(--lime);line-height:1;}
+.offer-pnote{font-size:0.75rem;color:var(--mt);margin-bottom:20px;}
+.offer-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;}
+.offer-list li{font-size:0.82rem;color:var(--mt);display:flex;gap:9px;align-items:flex-start;}
+.offer-list li::before{content:'→';color:var(--lime);flex-shrink:0;}
+.offer-link{display:inline-block;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.04em;padding:13px 26px;border:1px solid var(--brh);color:var(--tx);transition:all 0.2s;}
+.offer-link:hover{border-color:var(--lime);color:var(--lime);}
+.offer-card.featured .offer-link{background:var(--lime);color:#000;border-color:var(--lime);}
+.offer-card.featured .offer-link:hover{background:#d9ff40;}
+.tripwire-note{font-size:0.75rem;color:var(--mt);margin-top:12px;line-height:1.5;}
+.tripwire-note strong{color:var(--lime);}
+/* FAQ */
+.obj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px;background:var(--br);}
+.obj-item{background:var(--bg);padding:28px 24px;}
+.obj-q{font-family:'Syne',sans-serif;font-weight:600;font-size:0.87rem;margin-bottom:10px;color:var(--mt2);}
+.obj-q::before{content:'"';color:var(--lime);}
+.obj-q::after{content:'"';}
+.obj-a{font-size:0.83rem;color:var(--mt);line-height:1.65;}
+/* INTAKE */
+.intake-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px;background:var(--br);}
+.intake-item{background:var(--s1);padding:28px 24px;}
+.intake-label{font-family:'Syne',sans-serif;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime);margin-bottom:12px;}
+.intake-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:10px;}
+.intake-desc{font-size:0.8rem;color:var(--mt);line-height:1.65;}
+.intake-note{font-size:0.75rem;color:var(--amber);margin-top:8px;line-height:1.4;}
+/* CTA */
+.final-cta{background:var(--lime);padding:90px 48px;text-align:center;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(255,255,255,0.15) 0%,transparent 70%);}
+.final-cta-label{font-family:'Syne',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:16px;}
+.final-cta h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:-0.04em;line-height:1.05;color:#000;margin-bottom:14px;max-width:700px;margin-left:auto;margin-right:auto;}
+.final-cta .sub-p{color:rgba(0,0,0,0.55);font-size:0.95rem;margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto;}
+.btn-dark{background:#000;color:var(--lime);font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;padding:16px 40px;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;margin-bottom:10px;}
+.btn-dark:hover{background:#111;transform:translateY(-2px);}
+.cta-secondary{font-size:0.82rem;color:rgba(0,0,0,0.55);margin-top:16px;}
+.cta-secondary a{color:rgba(0,0,0,0.7);text-decoration:underline;}
+footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;}
+.foot-logo span{color:var(--lime);}
+.foot-links{display:flex;gap:28px;}
+.foot-links a{font-size:0.75rem;color:var(--mt2);transition:color 0.2s;}
+.foot-links a:hover{color:var(--mt);}
+.foot-legal{font-size:0.7rem;color:var(--mt2);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slam{from{opacity:0;transform:scale(0.88) translateY(16px)}to{opacity:1;transform:none}}
+[data-a]{opacity:0;transform:translateY(26px);transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.16,1,0.3,1);}
+[data-a].vis{opacity:1;transform:none;}
+[data-a][data-d="1"].vis{transition-delay:0.08s;}[data-a][data-d="2"].vis{transition-delay:0.16s;}[data-a][data-d="3"].vis{transition-delay:0.24s;}
+@media(max-width:860px){
+  nav{padding:16px 20px;}.nav-links{display:none;}
+  .hero,.proof-bar,section,footer{padding-left:20px;padding-right:20px;}
+  .deliv-grid,.avatar-grid,.offers-grid,.how-grid,.obj-grid,.intake-grid{grid-template-columns:1fr;}
+  .proof-bar{gap:20px;}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="logo">Include<span>Brake</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Chatbot Automation</a></li>
+    <li><a href="#offers">Pricing</a></li>
+    <li><a href="#how">The Process</a></li>
+    <li><a href="tractionbuild.html">TractionBuild</a></li>
+  </ul>
+  <a href="STRIPE_BLUEPRINT" class="nav-cta">Check Availability</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">90-Day Authority Blueprint · Ghostwriting Day Rate</p>
+    <h1>Give Me <span class="lime">20 Minutes.</span><br>Get 90 Days of Authority<br>Content Written in Your Exact Voice.</h1>
+    <p class="hero-sub">No generic AI slop. No ghostwriters guessing your tone. A battle-tested system that clones your writing style, extracts your genius, and hands you a finished Quarterly Content Vault — in 24 hours.</p>
+    <div class="hero-actions">
+      <a href="STRIPE_BLUEPRINT" class="btn-primary">Check Availability</a>
+      <a href="STRIPE_TRIPWIRE" class="btn-secondary">Try the $299 Voice Audit First</a>
+    </div>
+    <p class="scarcity">⚡ Only 4 slots/month. If this page is live, there's availability.</p>
+  </div>
+</section>
+
+<div class="proof-bar">
+  <div class="proof-stat"><div class="num">24 hrs</div><div class="lbl">Delivery</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">4 slots</div><div class="lbl">Max/Month</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">$1,500</div><div class="lbl">Day Rate</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-stat"><div class="num">100%</div><div class="lbl">Your IP</div></div>
+  <div class="proof-div"></div>
+  <p style="font-size:0.8rem;color:var(--mt);max-width:280px;line-height:1.5;flex:1;">A skilled ghostwriter costs $4K–8K/month. This is 90 days of assets for $1,500 + a reusable style guide you keep forever.</p>
+</div>
+
+<!-- DELIVERABLES -->
+<section style="background:var(--s1);">
+  <p class="s-label" data-a>What You Get</p>
+  <h2 class="s-title" data-a data-d="1">The Quarterly<br>Content Vault.</h2>
+  <div class="deliv-grid">
+    <div class="deliv-item deliv-highlight" data-a data-d="1">
+      <div class="deliv-icon">🧬</div>
+      <div class="deliv-name">Digital Twin Style Guide</div>
+      <p class="deliv-desc">Codified voice doc: sentence length, tone, vocabulary, hot-take frequency, "never use" rules. Reusable forever. Worth the price alone — paste it into ChatGPT or Claude for future writing.</p>
+    </div>
+    <div class="deliv-item" data-a data-d="1">
+      <div class="deliv-icon">📝</div>
+      <div class="deliv-name">12 Long-Form LinkedIn Posts</div>
+      <p class="deliv-desc">300–500 words each. Contrarian angles extracted directly from your intake rant. Your opinions, your voice — not a ghostwriter's best guess.</p>
+    </div>
+    <div class="deliv-item" data-a data-d="2">
+      <div class="deliv-icon">⚡</div>
+      <div class="deliv-name">24 Short-Form Zingers</div>
+      <p class="deliv-desc">Twitter/LinkedIn hooks — punchy, schedulable, derived from the long-form pillars. 3 months of daily posts without writing a word.</p>
+    </div>
+    <div class="deliv-item" data-a data-d="2">
+      <div class="deliv-icon">📧</div>
+      <div class="deliv-name">3-Email Welcome Sequence</div>
+      <p class="deliv-desc">Plug-and-play for newsletter building. Intro / value / CTA arc. Written in your voice, ready to upload.</p>
+    </div>
+    <div class="deliv-item" data-a data-d="3">
+      <div class="deliv-icon">🎬</div>
+      <div class="deliv-name">5-Min Strategy Walkthrough</div>
+      <p class="deliv-desc">Loom video walking through the content strategy and how to use each asset. No confusion about what to post first.</p>
+    </div>
+    <div class="deliv-item" data-a data-d="3">
+      <div class="deliv-icon">🤖</div>
+      <div class="deliv-name">Custom Instruction Prompt</div>
+      <p class="deliv-desc">Paste into ChatGPT or Claude for future writing. Your Digital Twin in a box — generate on-brand content yourself after delivery. Bonus.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AVATAR -->
+<section>
+  <p class="s-label" data-a>Who This Is For</p>
+  <h2 class="s-title" data-a data-d="1">Brilliant. Invisible.<br>Busy.</h2>
+  <div class="avatar-grid">
+    <div>
+      <div class="signal-list">
+        <div class="signal-item" data-a data-d="1"><span class="signal-check">✓</span><p><strong>B2B Consultants, Agency Owners, Technical Founders</strong> who close $20K+ deals but have 47 LinkedIn followers.</p></div>
+        <div class="signal-item" data-a data-d="2"><span class="signal-check">✓</span><p>Knows personal brand drives inbound leads but <strong>never posts</strong> — or posts 2–5x/week with zero engagement.</p></div>
+        <div class="signal-item" data-a data-d="3"><span class="signal-check">✓</span><p>Has tried ChatGPT for content. <strong>Hates how it sounds.</strong> Every draft sounds like every other draft.</p></div>
+        <div class="signal-item" data-a data-d="1"><span class="signal-check">✓</span><p>Bio cramming in 3+ titles. <strong>500+ connections, no comments</strong> — reach without resonance.</p></div>
+        <div class="signal-item" data-a data-d="2"><span class="signal-check">✓</span><p>Former corporate executive now consulting. <strong>Big story, corporate voice.</strong> Needs extraction, not writing lessons.</p></div>
+      </div>
+      <div class="not-for" data-a>
+        <strong>Not a fit:</strong>
+        <ul>
+          <li>People wanting to "try AI content" (Fiverr is for them)</li>
+          <li>Brands needing daily posting management (asset creation, not retainer)</li>
+          <li>Anyone who doesn't know their niche or audience yet</li>
+        </ul>
+      </div>
+    </div>
+    <div class="value-box" data-a>
+      <div class="value-big">$6K+</div>
+      <div class="value-sub">average monthly cost of a skilled ghostwriter. This is 90 days of finished assets for $1,500 — plus a reusable style guide.</div>
+      <div class="value-div"></div>
+      <div class="value-big">4 slots</div>
+      <div class="value-sub">max per month. Day Rate model — not a factory. Your slot gets my full focus for 8 hours.</div>
+      <div class="value-div"></div>
+      <div class="value-big">100%</div>
+      <div class="value-sub">yours. Use it, remix it, white-label it. No license, no usage restrictions. You paid for the asset.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how" style="background:var(--s1);">
+  <p class="s-label" data-a>The Process</p>
+  <h2 class="s-title" data-a data-d="1">Your 8-hour<br>execution day.</h2>
+  <div class="how-grid">
+    <div class="how-item" data-a data-d="1">
+      <div class="how-hour">Hours 1–2</div>
+      <div class="how-name">Digital Twin Calibration</div>
+      <p class="how-desc">Your voice samples + rant get transcribed and run through a 4-dimension linguistic analysis: tone, structural rhythm, vocabulary, and idiosyncrasies. Output: your Style Guide PDF. This is the document you keep forever.</p>
+    </div>
+    <div class="how-item" data-a data-d="2">
+      <div class="how-hour">Hours 3–4</div>
+      <div class="how-name">Topic Architecture</div>
+      <p class="how-desc">12 content angles extracted from your intake rant. Not generic thought leadership topics — your actual opinions, stories, and takes. The kind that make people comment "this is exactly what I needed to hear."</p>
+    </div>
+    <div class="how-item" data-a data-d="3">
+      <div class="how-hour">Hours 4–6</div>
+      <div class="how-name">AI-Assisted Production</div>
+      <p class="how-desc">Style Guide becomes the system prompt. All 36 assets generated using your voice as the constraint, not a generic writing persona. Banned words list enforced on every batch.</p>
+    </div>
+    <div class="how-item" data-a data-d="1">
+      <div class="how-hour">Hours 7–8</div>
+      <div class="how-name">Human Polish</div>
+      <p class="how-desc">This is the 20% that justifies the fee. Every post gets your actual war stories from the intake rant injected. Robotic sentences broken. Your verbal tics added. Read aloud test on every piece.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTAKE -->
+<section>
+  <p class="s-label" data-a>The Intake Process</p>
+  <h2 class="s-title" data-a data-d="1">What you send.<br>Why it matters.</h2>
+  <p class="s-sub" data-a data-d="2">After payment, you get an automated email with two inputs. The sooner I have them, the more calibration time before your slot.</p>
+  <div class="intake-grid">
+    <div class="intake-item" data-a data-d="1">
+      <div class="intake-label">Input 1</div>
+      <div class="intake-title">Voice Analysis Samples</div>
+      <p class="intake-desc">Upload 3 PDFs of your best emails, blog posts, or talk transcripts. OR link a podcast/video episode you've done.</p>
+      <p class="intake-note">Important: emails, Slack rants, voice notes — NOT polished LinkedIn posts. Polished posts are already filtered; they strip the voice you need.</p>
+    </div>
+    <div class="intake-item" data-a data-d="2">
+      <div class="intake-label">Input 2</div>
+      <div class="intake-title">The 10-Minute Rant</div>
+      <p class="intake-desc">A Loom or voice note answering three prompts: What's the biggest lie in your industry? What's a recent client win and how did you get it? What are you selling right now and who is it for?</p>
+      <p class="intake-note">If your recording is under 4 minutes, redo it. The first 2 minutes are always PR spin. I need what comes after.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section id="offers" style="background:var(--s1);">
+  <p class="s-label" data-a>Pricing</p>
+  <h2 class="s-title" data-a data-d="1">Start with the audit.<br>Lock the sprint.</h2>
+  <div class="offers-grid" data-a>
+    <div class="offer-card featured">
+      <span class="offer-badge">Flagship</span>
+      <div class="offer-name">90-Day Authority Blueprint</div>
+      <div class="offer-price">$1,500</div>
+      <div class="offer-pnote">One-time · Paid upfront to reserve slot · 24hr delivery from intake receipt</div>
+      <ul class="offer-list">
+        <li>Digital Twin Style Guide (reusable forever)</li>
+        <li>12 long-form LinkedIn posts (300–500 words each)</li>
+        <li>24 short-form zingers (schedulable immediately)</li>
+        <li>3-email welcome sequence</li>
+        <li>5-min Loom strategy walkthrough</li>
+        <li>Custom Instruction Prompt (paste into any AI)</li>
+        <li>1 revision round within 48 hours</li>
+        <li>100% ownership — no license, no restrictions</li>
+      </ul>
+      <a href="STRIPE_BLUEPRINT" class="offer-link">Lock My Slot — $1,500 →</a>
+      <p style="font-size:0.72rem;color:var(--mt);margin-top:12px;">Capacity: 4 slots/month. Intake due 48 hours before your booked date.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-badge">Tripwire</span>
+      <div class="offer-name">Digital Twin Calibration</div>
+      <div class="offer-price">$299</div>
+      <div class="offer-pnote">One-time · 60-minute fulfillment</div>
+      <ul class="offer-list">
+        <li>Voice DNA PDF (2-page style guide)</li>
+        <li>3 sample posts written in your voice</li>
+        <li>See the system before committing to the sprint</li>
+      </ul>
+      <a href="STRIPE_TRIPWIRE" class="offer-link">Start with the Audit →</a>
+      <p class="tripwire-note"><strong>$299 credited</strong> toward the full $1,500 Blueprint if you upgrade within 7 days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <p class="s-label" data-a>FAQ</p>
+  <h2 class="s-title" data-a data-d="1">Your objections.</h2>
+  <div class="obj-grid">
+    <div class="obj-item" data-a data-d="1"><p class="obj-q">Can't I just use ChatGPT?</p><p class="obj-a">Sure — and it'll sound like every other ChatGPT post. The 2-hour Voice Calibration phase is the difference. The Digital Twin guide alone saves 50+ hours over the next year.</p></div>
+    <div class="obj-item" data-a data-d="2"><p class="obj-q">What if I don't like the output?</p><p class="obj-a">One revision round, 48-hour turnaround. In practice this almost never happens — the intake process is that thorough.</p></div>
+    <div class="obj-item" data-a data-d="3"><p class="obj-q">Do I own it?</p><p class="obj-a">100%. Use it, remix it, white-label it. You paid for the asset. No license, no usage restrictions, no ghostwriter attribution required.</p></div>
+    <div class="obj-item" data-a data-d="1"><p class="obj-q">What if I need more than 90 days?</p><p class="obj-a">Book another Day Rate in month 4. Or use the Digital Twin Prompt to generate on-brand content yourself — that's what the Custom Instruction Prompt is for.</p></div>
+    <div class="obj-item" data-a data-d="2"><p class="obj-q">Why not just hire a full-time ghostwriter?</p><p class="obj-a">$4K–8K/month vs. $1,500 quarterly. Do the math. And a ghostwriter doesn't give you a reusable style system you can run yourself.</p></div>
+    <div class="obj-item" data-a data-d="3"><p class="obj-q">What does "4 slots/month" actually mean?</p><p class="obj-a">Day Rate model — I go dark on your content day and build for 8 hours straight. I can only do that 4 times per month without compromising quality. When they're gone, they're gone.</p></div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <p class="final-cta-label">Ready?</p>
+  <h2>Give Me 20 Minutes. Get 90 Days of Content.</h2>
+  <p class="sub-p">Lock your slot. Complete the intake within 48 hours. Get your Authority Vault delivered in 24 hours after that.</p>
+  <a href="STRIPE_BLUEPRINT" class="btn-dark">Lock My Slot — $1,500</a>
+  <p class="cta-secondary">Not ready to commit? <a href="STRIPE_TRIPWIRE">Start with the $299 Voice Audit first →</a></p>
+</section>
+
+<footer>
+  <div class="foot-logo">Include<span>Brake</span></div>
+  <div class="foot-links"><a href="index.html">Chatbot Automation</a><a href="tractionbuild.html">TractionBuild</a></div>
+  <p class="foot-legal">© 2026 IncludeBrake · Chesnee, SC</p>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
