@@ -143,7 +143,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
     <li><a href="#how">The Process</a></li>
     <li><a href="tractionbuild.html">TractionBuild</a></li>
   </ul>
-  <a href="STRIPE_BLUEPRINT" class="nav-cta">Check Availability</a>
+  <a href="#waitlist" class="nav-cta">Check Availability</a>
 </nav>
 
 <section class="hero">
@@ -153,8 +153,8 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
     <h1>Give Me <span class="lime">20 Minutes.</span><br>Get 90 Days of Authority<br>Content Written in Your Exact Voice.</h1>
     <p class="hero-sub">No generic AI slop. No ghostwriters guessing your tone. A battle-tested system that clones your writing style, extracts your genius, and hands you a finished Quarterly Content Vault — in 24 hours.</p>
     <div class="hero-actions">
-      <a href="STRIPE_BLUEPRINT" class="btn-primary">Check Availability</a>
-      <a href="STRIPE_TRIPWIRE" class="btn-secondary">Try the $299 Voice Audit First</a>
+      <a href="#waitlist" class="btn-primary">Check Availability</a>
+      <a href="#waitlist" class="btn-secondary">Try the $299 Voice Audit First</a>
     </div>
     <p class="scarcity">⚡ Only 4 slots/month. If this page is live, there's availability.</p>
   </div>
@@ -314,7 +314,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
         <li>1 revision round within 48 hours</li>
         <li>100% ownership — no license, no restrictions</li>
       </ul>
-      <a href="STRIPE_BLUEPRINT" class="offer-link">Lock My Slot — $1,500 →</a>
+      <a href="#waitlist" class="offer-link">Lock My Slot — $1,500 →</a>
       <p style="font-size:0.72rem;color:var(--mt);margin-top:12px;">Capacity: 4 slots/month. Intake due 48 hours before your booked date.</p>
     </div>
     <div class="offer-card">
@@ -327,7 +327,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
         <li>3 sample posts written in your voice</li>
         <li>See the system before committing to the sprint</li>
       </ul>
-      <a href="STRIPE_TRIPWIRE" class="offer-link">Start with the Audit →</a>
+      <a href="#waitlist" class="offer-link">Start with the Audit →</a>
       <p class="tripwire-note"><strong>$299 credited</strong> toward the full $1,500 Blueprint if you upgrade within 7 days.</p>
     </div>
   </div>
@@ -351,8 +351,8 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
   <p class="final-cta-label">Ready?</p>
   <h2>Give Me 20 Minutes. Get 90 Days of Content.</h2>
   <p class="sub-p">Lock your slot. Complete the intake within 48 hours. Get your Authority Vault delivered in 24 hours after that.</p>
-  <a href="STRIPE_BLUEPRINT" class="btn-dark">Lock My Slot — $1,500</a>
-  <p class="cta-secondary">Not ready to commit? <a href="STRIPE_TRIPWIRE">Start with the $299 Voice Audit first →</a></p>
+  <a href="#waitlist" class="btn-dark">Lock My Slot — $1,500</a>
+  <p class="cta-secondary">Not ready to commit? <a href="#waitlist">Start with the $299 Voice Audit first →</a></p>
 </section>
 
 <footer>
@@ -365,6 +365,60 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+</script>
+<!-- WAITLIST MODAL -->
+<div id="waitlist" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:40px 36px;max-width:440px;width:90%;position:relative;font-family:inherit;">
+    <button onclick="document.getElementById('waitlist').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1;">&#215;</button>
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#16a34a;text-transform:uppercase;margin-bottom:8px;">Early Access</div>
+    <h2 style="font-size:22px;font-weight:700;color:#111;margin:0 0 10px;">Join the waitlist</h2>
+    <p style="font-size:14px;color:#555;margin:0 0 24px;line-height:1.6;">We're onboarding a limited number of clients. Drop your email and we'll reach out within 24 hours.</p>
+    <form id="waitlist-form" onsubmit="handleWaitlist(event)" style="display:flex;flex-direction:column;gap:12px;">
+      <input type="text" id="wl-name" placeholder="Your name" required style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <input type="email" id="wl-email" placeholder="Your email" required style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <input type="text" id="wl-biz" placeholder="Business type (e.g. HVAC, Salon)" style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <button type="submit" style="background:#111;color:#fff;border:none;border-radius:8px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">Reserve My Spot &#8594;</button>
+    </form>
+    <div id="wl-success" style="display:none;text-align:center;padding:16px 0;">
+      <div style="font-size:32px;margin-bottom:12px;">&#10003;</div>
+      <div style="font-size:17px;font-weight:600;color:#111;margin-bottom:6px;">You're on the list.</div>
+      <div style="font-size:13px;color:#666;">We'll be in touch within 24 hours.</div>
+    </div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('a[href="#waitlist"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var m=document.getElementById('waitlist');
+    m.style.display='flex';
+    document.getElementById('waitlist-form').style.display='flex';
+    document.getElementById('wl-success').style.display='none';
+  });
+});
+document.getElementById('waitlist').addEventListener('click',function(e){
+  if(e.target===this) this.style.display='none';
+});
+async function handleWaitlist(e){
+  e.preventDefault();
+  var name=document.getElementById('wl-name').value;
+  var email=document.getElementById('wl-email').value;
+  var biz=document.getElementById('wl-biz').value;
+  var btn=e.target.querySelector('button[type="submit"]');
+  btn.textContent='Sending...';
+  btn.disabled=true;
+  var [firstname,...rest]=name.trim().split(' ');
+  var lastname=rest.join(' ')||'';
+  try{
+    await fetch('/api/waitlist',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({firstname,lastname,email,company:biz})
+    });
+  }catch(err){console.warn('HubSpot submit error',err);}
+  document.getElementById('waitlist-form').style.display='none';
+  document.getElementById('wl-success').style.display='block';
+}
 </script>
 </body>
 </html>

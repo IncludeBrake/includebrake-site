@@ -314,7 +314,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
           <li>48-hour support</li>
           <li>Output to organized project directories</li>
         </ul>
-        <a href="STRIPE_TB_STARTER" class="tier-link">Get Starter →</a>
+        <a href="#waitlist" class="tier-link">Get Starter →</a>
       </div>
       <div class="tier-card">
         <div class="tier-name">Pro</div>
@@ -327,7 +327,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
           <li>Results tracking: signups, engagement, conversion signal</li>
           <li>Priority support</li>
         </ul>
-        <a href="STRIPE_TB_PRO" class="tier-link">Get Pro →</a>
+        <a href="#waitlist" class="tier-link">Get Pro →</a>
       </div>
       <div class="tier-card">
         <div class="tier-name">Agency</div>
@@ -340,7 +340,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
           <li>API access</li>
           <li>Technical comfort required</li>
         </ul>
-        <a href="STRIPE_TB_AGENCY" class="tier-link">Get Agency →</a>
+        <a href="#waitlist" class="tier-link">Get Agency →</a>
       </div>
     </div>
   </div>
@@ -413,6 +413,60 @@ function handleSignup(){
   if(!v||!v.includes('@'))return;
   document.getElementById('form-confirm').style.display='block';
   document.getElementById('emailInput').value='';
+}
+</script>
+<!-- WAITLIST MODAL -->
+<div id="waitlist" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:40px 36px;max-width:440px;width:90%;position:relative;font-family:inherit;">
+    <button onclick="document.getElementById('waitlist').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1;">&#215;</button>
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#16a34a;text-transform:uppercase;margin-bottom:8px;">Early Access</div>
+    <h2 style="font-size:22px;font-weight:700;color:#111;margin:0 0 10px;">Join the waitlist</h2>
+    <p style="font-size:14px;color:#555;margin:0 0 24px;line-height:1.6;">We're onboarding a limited number of clients. Drop your email and we'll reach out within 24 hours.</p>
+    <form id="waitlist-form" onsubmit="handleWaitlist(event)" style="display:flex;flex-direction:column;gap:12px;">
+      <input type="text" id="wl-name" placeholder="Your name" required style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <input type="email" id="wl-email" placeholder="Your email" required style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <input type="text" id="wl-biz" placeholder="Business type (e.g. HVAC, Salon)" style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <button type="submit" style="background:#111;color:#fff;border:none;border-radius:8px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">Reserve My Spot &#8594;</button>
+    </form>
+    <div id="wl-success" style="display:none;text-align:center;padding:16px 0;">
+      <div style="font-size:32px;margin-bottom:12px;">&#10003;</div>
+      <div style="font-size:17px;font-weight:600;color:#111;margin-bottom:6px;">You're on the list.</div>
+      <div style="font-size:13px;color:#666;">We'll be in touch within 24 hours.</div>
+    </div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('a[href="#waitlist"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var m=document.getElementById('waitlist');
+    m.style.display='flex';
+    document.getElementById('waitlist-form').style.display='flex';
+    document.getElementById('wl-success').style.display='none';
+  });
+});
+document.getElementById('waitlist').addEventListener('click',function(e){
+  if(e.target===this) this.style.display='none';
+});
+async function handleWaitlist(e){
+  e.preventDefault();
+  var name=document.getElementById('wl-name').value;
+  var email=document.getElementById('wl-email').value;
+  var biz=document.getElementById('wl-biz').value;
+  var btn=e.target.querySelector('button[type="submit"]');
+  btn.textContent='Sending...';
+  btn.disabled=true;
+  var [firstname,...rest]=name.trim().split(' ');
+  var lastname=rest.join(' ')||'';
+  try{
+    await fetch('/api/waitlist',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({firstname,lastname,email,company:biz})
+    });
+  }catch(err){console.warn('HubSpot submit error',err);}
+  document.getElementById('waitlist-form').style.display='none';
+  document.getElementById('wl-success').style.display='block';
 }
 </script>
 </body>

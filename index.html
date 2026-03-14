@@ -160,7 +160,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
     <p class="hero-sub">We build AI chat assistants for local service businesses. Customers get answers at midnight. You wake up with booked jobs.</p>
     <div class="hero-actions">
       <a href="#offers" class="btn-primary">See How It Works</a>
-      <a href="STRIPE_DFY" class="btn-ghost">Get Your Chatbot — $1,000 →</a>
+      <a href="#waitlist" class="btn-ghost">Get Your Chatbot — $1,000 →</a>
     </div>
     <p class="trust-line">No website traffic? <a href="#fit" style="color:var(--lime);">Check if you're a fit first →</a></p>
   </div>
@@ -224,7 +224,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
           <li>Cal.com booking integration</li>
           <li>14-day post-launch support included</li>
         </ul>
-        <a href="STRIPE_DFY" class="offer-link">Get My Chatbot Built →</a>
+        <a href="#waitlist" class="offer-link">Get My Chatbot Built →</a>
       </div>
       <div class="offer-card">
         <span class="offer-badge">Full Stack</span>
@@ -238,7 +238,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
           <li>Twilio phone number setup</li>
           <li>Call transfer to your real number on request</li>
         </ul>
-        <a href="STRIPE_VOICE" class="offer-link">Get a Custom Quote →</a>
+        <a href="#waitlist" class="offer-link">Get a Custom Quote →</a>
       </div>
     </div>
     <div class="addons">
@@ -247,21 +247,21 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
         <div class="addon-price">$300</div>
         <div class="addon-note">One-time add-on</div>
         <p class="addon-desc">SMS/email fires within 60 seconds of every lead capture. Wake up knowing, not wondering.</p>
-        <a href="STRIPE_ALERT" class="addon-link">Add Lead Alerts →</a>
+        <a href="#waitlist" class="addon-link">Add Lead Alerts →</a>
       </div>
       <div class="addon">
         <div class="addon-name">Daily Lead Brief</div>
         <div class="addon-price">$200</div>
         <div class="addon-note">One-time add-on</div>
         <p class="addon-desc">Automated 7am digest of everything your chatbot captured the previous day.</p>
-        <a href="STRIPE_BRIEF" class="addon-link">Add Daily Brief →</a>
+        <a href="#waitlist" class="addon-link">Add Daily Brief →</a>
       </div>
       <div class="addon">
         <div class="addon-name">Both Lead Packages</div>
         <div class="addon-price">$400</div>
         <div class="addon-note">One-time add-on · Save $100</div>
         <p class="addon-desc">Real-time alerts AND the daily brief. Full visibility on every lead, immediate and overnight.</p>
-        <a href="STRIPE_BUNDLE" class="addon-link">Get Both →</a>
+        <a href="#waitlist" class="addon-link">Get Both →</a>
       </div>
     </div>
   </div>
@@ -321,7 +321,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
   <p class="final-cta-label">Ready?</p>
   <h2>Stop losing leads tonight.</h2>
   <p class="sub-p">Get your AI chatbot built and live in under a week. You fill out one form. We handle everything else. Build starts as soon as payment clears.</p>
-  <a href="STRIPE_DFY" class="btn-dark">Get My Chatbot Built — $1,000</a>
+  <a href="#waitlist" class="btn-dark">Get My Chatbot Built — $1,000</a>
   <p class="cta-urgency">You'll hear from us within 24 hours of payment.</p>
 </section>
 
@@ -335,6 +335,60 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}}),{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+</script>
+<!-- WAITLIST MODAL -->
+<div id="waitlist" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:40px 36px;max-width:440px;width:90%;position:relative;font-family:inherit;">
+    <button onclick="document.getElementById('waitlist').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1;">&#215;</button>
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#16a34a;text-transform:uppercase;margin-bottom:8px;">Early Access</div>
+    <h2 style="font-size:22px;font-weight:700;color:#111;margin:0 0 10px;">Join the waitlist</h2>
+    <p style="font-size:14px;color:#555;margin:0 0 24px;line-height:1.6;">We're onboarding a limited number of clients. Drop your email and we'll reach out within 24 hours.</p>
+    <form id="waitlist-form" onsubmit="handleWaitlist(event)" style="display:flex;flex-direction:column;gap:12px;">
+      <input type="text" id="wl-name" placeholder="Your name" required style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <input type="email" id="wl-email" placeholder="Your email" required style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <input type="text" id="wl-biz" placeholder="Business type (e.g. HVAC, Salon)" style="padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;font-family:inherit;" />
+      <button type="submit" style="background:#111;color:#fff;border:none;border-radius:8px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">Reserve My Spot &#8594;</button>
+    </form>
+    <div id="wl-success" style="display:none;text-align:center;padding:16px 0;">
+      <div style="font-size:32px;margin-bottom:12px;">&#10003;</div>
+      <div style="font-size:17px;font-weight:600;color:#111;margin-bottom:6px;">You're on the list.</div>
+      <div style="font-size:13px;color:#666;">We'll be in touch within 24 hours.</div>
+    </div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('a[href="#waitlist"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var m=document.getElementById('waitlist');
+    m.style.display='flex';
+    document.getElementById('waitlist-form').style.display='flex';
+    document.getElementById('wl-success').style.display='none';
+  });
+});
+document.getElementById('waitlist').addEventListener('click',function(e){
+  if(e.target===this) this.style.display='none';
+});
+async function handleWaitlist(e){
+  e.preventDefault();
+  var name=document.getElementById('wl-name').value;
+  var email=document.getElementById('wl-email').value;
+  var biz=document.getElementById('wl-biz').value;
+  var btn=e.target.querySelector('button[type="submit"]');
+  btn.textContent='Sending...';
+  btn.disabled=true;
+  var [firstname,...rest]=name.trim().split(' ');
+  var lastname=rest.join(' ')||'';
+  try{
+    await fetch('/api/waitlist',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({firstname,lastname,email,company:biz})
+    });
+  }catch(err){console.warn('HubSpot submit error',err);}
+  document.getElementById('waitlist-form').style.display='none';
+  document.getElementById('wl-success').style.display='block';
+}
 </script>
 </body>
 </html>

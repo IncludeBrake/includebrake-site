@@ -1,9 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/authority",    "destination": "/authority.html"    },
-    { "source": "/validate",     "destination": "/tractionbuild.html" },
-    { "source": "/tractionbuild","destination": "/tractionbuild.html" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/authority", "dest": "/authority.html" },
+    { "src": "/validate", "dest": "/tractionbuild.html" },
+    { "src": "/tractionbuild", "dest": "/tractionbuild.html" }
   ]
 }
