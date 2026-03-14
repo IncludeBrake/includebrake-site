@@ -1,4 +1,4 @@
-export const config = { runtime: 'edge' };
+﻿export const config = { runtime: 'edge' };
 
 export default async function handler(req) {
   if (req.method !== 'POST') {
@@ -32,9 +32,8 @@ export default async function handler(req) {
           lastname: lastname || '',
           email,
           company: company || '',
-          hs_lead_status: 'NEW',
           lifecyclestage: 'lead',
-          lead_source: 'includebrake.com waitlist'
+          hs_lead_status: 'NEW'
         }
       })
     });
