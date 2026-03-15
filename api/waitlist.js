@@ -47,7 +47,7 @@ export default async function handler(req) {
     }
 
     // 2. Resend — confirmation email to lead
-    await fetch('https://api.resend.com/emails', {
+    const resendRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,13 +65,17 @@ export default async function handler(req) {
         `
       })
     });
+    if (!resendRes.ok) {
+      const resendErr = await resendRes.json();
+      throw new Error(`Resend error: ${JSON.stringify(resendErr)}`);
+    }
 
     // 3. Twilio — SMS alert to Jes
     const twilioSid = process.env.TWILIO_ACCOUNT_SID;
     const twilioAuth = process.env.TWILIO_AUTH_TOKEN;
     const smsBody = `New IncludeBrake lead:\nName: ${firstname} ${lastname || ''}\nEmail: ${email}\nBusiness: ${company || 'not provided'}`;
 
-    await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`, {
+    const twilioRes = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -83,6 +87,10 @@ export default async function handler(req) {
         Body: smsBody
       })
     });
+    if (!twilioRes.ok) {
+      const twilioErr = await twilioRes.json();
+      throw new Error(`Twilio error: ${JSON.stringify(twilioErr)}`);
+    }
 
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,
