@@ -1,4 +1,4 @@
-﻿export const config = { runtime: 'edge' };
+export const config = { runtime: 'edge' };
 
 export default async function handler(req) {
   if (req.method !== 'POST') {
@@ -20,6 +20,7 @@ export default async function handler(req) {
       });
     }
 
+    // 1. HubSpot contact creation
     const hsRes = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
       method: 'POST',
       headers: {
@@ -40,14 +41,48 @@ export default async function handler(req) {
 
     if (!hsRes.ok) {
       const err = await hsRes.json();
-      if (err.category === 'CONFLICT') {
-        return new Response(JSON.stringify({ ok: true, note: 'already_exists' }), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': corsOrigin }
-        });
+      if (err.category !== 'CONFLICT') {
+        throw new Error(err.message || 'HubSpot API error');
       }
-      throw new Error(err.message || 'HubSpot API error');
     }
+
+    // 2. Resend — confirmation email to lead
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
+      },
+      body: JSON.stringify({
+        from: 'IncludeBrake <support@support.includebrake.com>',
+        to: [email],
+        subject: "You're on the list — IncludeBrake",
+        html: `
+          <p>Hey ${firstname},</p>
+          <p>Thanks for reaching out. We got your info and will be in touch within 24 hours.</p>
+          <p>In the meantime, if you have any questions you can reply directly to this email.</p>
+          <p>— Jes<br>IncludeBrake</p>
+        `
+      })
+    });
+
+    // 3. Twilio — SMS alert to Jes
+    const twilioSid = process.env.TWILIO_ACCOUNT_SID;
+    const twilioAuth = process.env.TWILIO_AUTH_TOKEN;
+    const smsBody = `New IncludeBrake lead:\nName: ${firstname} ${lastname || ''}\nEmail: ${email}\nBusiness: ${company || 'not provided'}`;
+
+    await fetch(`https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${btoa(`${twilioSid}:${twilioAuth}`)}`
+      },
+      body: new URLSearchParams({
+        From: process.env.TWILIO_FROM,
+        To: process.env.TWILIO_TO,
+        Body: smsBody
+      })
+    });
 
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,
