@@ -1,5 +1,14 @@
 export const config = { runtime: 'edge' };
 
+function toBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
 export default async function handler(req) {
   if (req.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 });
@@ -54,7 +63,7 @@ export default async function handler(req) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'IncludeBrake <support@support.includebrake.com>',
+        from: 'IncludeBrake <support@em.includebrake.com>',
         to: [email],
         subject: "You're on the list — IncludeBrake",
         html: `
@@ -79,7 +88,7 @@ export default async function handler(req) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${btoa(`${twilioSid}:${twilioAuth}`)}`
+        'Authorization': `Basic ${toBase64(`${twilioSid}:${twilioAuth}`)}`
       },
       body: new URLSearchParams({
         From: process.env.TWILIO_FROM,
