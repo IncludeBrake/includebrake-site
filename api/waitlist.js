@@ -1,12 +1,7 @@
 export const config = { runtime: 'edge' };
 
 function toBase64(str) {
-  const bytes = new TextEncoder().encode(str);
-  let binary = '';
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
+  return btoa(unescape(encodeURIComponent(str)));
 }
 
 export default async function handler(req) {
