@@ -13,8 +13,13 @@ body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;line-
 a{text-decoration:none;color:inherit;}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s;border-bottom:1px solid transparent;}
 nav.scrolled{background:rgba(8,8,8,0.88);backdrop-filter:blur(20px);border-bottom-color:var(--br);}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.02em;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px;}
 .logo span{color:var(--lime);}
+#liquid-logo{display:block;cursor:pointer;}
+#logo-wrap .logo-fallback{display:none;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.02em;}
+#logo-wrap .logo-fallback span{color:var(--lime);}
+.no-webgl #liquid-logo{display:none;}
+.no-webgl #logo-wrap .logo-fallback{display:block;}
 .nav-links{display:flex;gap:28px;list-style:none;}
 .nav-links a{color:var(--mt);font-size:0.83rem;transition:color 0.2s;}
 .nav-links a:hover{color:var(--tx);}
@@ -30,8 +35,9 @@ nav.scrolled{background:rgba(8,8,8,0.88);backdrop-filter:blur(20px);border-botto
 .hero h1 .stroke{-webkit-text-stroke:1px rgba(245,245,240,0.25);color:transparent;}
 .hero-sub{font-size:1.05rem;color:var(--mt);max-width:500px;line-height:1.7;margin-bottom:44px;opacity:0;animation:fadeUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;}
 .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;opacity:0;animation:slam 0.6s 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;}
-.btn-primary{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;padding:15px 34px;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;}
-.btn-primary:hover{background:#d9ff40;transform:translateY(-2px);}
+.btn-primary{background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;padding:15px 34px;display:inline-block;border-radius:999px;position:relative;transition:transform 0.2s ease,box-shadow 0.3s ease;box-shadow:0 0 20px rgba(200,242,48,0.35),0 0 60px rgba(200,242,48,0.15);}
+.btn-primary:hover{background:#d9ff40;transform:translateY(-2px) scale(1.02);box-shadow:0 0 30px rgba(200,242,48,0.55),0 0 80px rgba(200,242,48,0.25),0 0 120px rgba(200,242,48,0.1);}
+.btn-primary:active{transform:translateY(0) scale(0.99);}
 .btn-ghost{color:var(--mt);font-size:0.85rem;display:flex;align-items:center;gap:7px;transition:color 0.2s;}
 .btn-ghost:hover{color:var(--tx);}
 .trust-line{font-size:0.78rem;color:var(--mt2);margin-top:14px;opacity:0;animation:fadeIn 1s 0.9s ease forwards;}
@@ -57,8 +63,8 @@ section{padding:100px 48px;}
 .not-fit{background:var(--s2);padding:20px 24px;border-left:2px solid var(--red);margin-top:16px;font-size:0.82rem;color:var(--mt);line-height:1.6;}
 .not-fit strong{color:var(--tx);display:block;margin-bottom:6px;}
 .offer-main{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--br);margin-top:56px;}
-.offer-card{background:var(--bg);padding:36px 32px;transition:background 0.3s;}
-.offer-card:hover{background:var(--s1);}
+.offer-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 32px;transition:background 0.25s ease,border-color 0.25s ease,transform 0.25s ease;}
+.offer-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(200,242,48,0.2);transform:translateY(-4px);}
 .offer-card.featured{background:var(--lgg);border:1px solid rgba(200,242,48,0.18);}
 .offer-badge{display:inline-block;background:var(--lime);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;margin-bottom:16px;}
 .offer-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:-0.01em;margin-bottom:6px;}
@@ -73,8 +79,8 @@ section{padding:100px 48px;}
 .offer-card.featured .offer-link{background:var(--lime);color:#000;border-color:var(--lime);}
 .offer-card.featured .offer-link:hover{background:#d9ff40;}
 .addons{margin-top:2px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--br);}
-.addon{background:var(--bg);padding:24px 22px;transition:background 0.3s;}
-.addon:hover{background:var(--s1);}
+.addon{background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px 22px;transition:background 0.25s ease,border-color 0.25s ease,transform 0.25s ease;}
+.addon:hover{background:rgba(255,255,255,0.07);border-color:rgba(200,242,48,0.2);transform:translateY(-4px);}
 .addon-name{font-family:'Syne',sans-serif;font-weight:600;font-size:0.85rem;margin-bottom:4px;}
 .addon-price{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;color:var(--lime);letter-spacing:-0.03em;}
 .addon-note{font-size:0.7rem;color:var(--mt);margin-bottom:10px;}
@@ -136,12 +142,17 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
   .prob-grid,.diff-grid,.offer-main,.ind-grid,.how-steps,.obj-grid,.addons{grid-template-columns:1fr;}
   .proof-bar{gap:20px;}
 }
-@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+@keyframes flicker{0%,19%,21%,23%,25%,54%,56%,100%{opacity:1;text-shadow:0 0 8px rgba(200,242,48,0.6),0 0 20px rgba(200,242,48,0.3);}20%,24%,55%{opacity:0.85;text-shadow:none;}}
+.flicker{animation:flicker 6s infinite;animation-delay:2s;}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}.flicker{animation:none!important;}}
 </style>
 </head>
 <body>
 <nav id="nav">
-  <div class="logo">Include<span>Brake</span></div>
+  <div class="logo" id="logo-wrap">
+    <canvas id="liquid-logo" width="160" height="44" aria-label="IncludeBrake"></canvas>
+    <div class="logo-fallback">Include<span>Brake</span></div>
+  </div>
   <ul class="nav-links">
     <li><a href="#offers">Services</a></li>
     <li><a href="#how">Process</a></li>
@@ -156,7 +167,7 @@ footer{padding:36px 48px;border-top:1px solid var(--br);display:flex;justify-con
   <div class="hero-bg"></div><div class="hero-grid"></div>
   <div class="hero-inner">
     <p class="eyebrow">AI Automation · Spartanburg &amp; Upstate SC</p>
-    <h1>Your Business<br><span class="lime">Stays Open</span><br><span class="stroke">After Hours.</span></h1>
+    <h1>Your Business<br><span class="lime" id="pressure-span">Stays Open</span><br><span class="stroke flicker">After Hours.</span></h1>
     <p class="hero-sub">We build AI chat assistants for local service businesses. Customers get answers at midnight. You wake up with booked jobs.</p>
     <div class="hero-actions">
       <a href="#offers" class="btn-primary">See How It Works</a>
@@ -389,6 +400,133 @@ async function handleWaitlist(e){
   document.getElementById('waitlist-form').style.display='none';
   document.getElementById('wl-success').style.display='block';
 }
+</script>
+<script>
+/* Liquid Metal Logo — WebGL shader for IB lettermark */
+(function() {
+  const canvas = document.getElementById('liquid-logo');
+  if (!canvas) return;
+  const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+  if (!gl) { document.documentElement.classList.add('no-webgl'); return; }
+
+  const VS = `attribute vec2 a_pos; void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
+
+  const FS = `
+    precision highp float;
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+
+    float roundedRect(vec2 p, vec2 b, float r) {
+      vec2 q = abs(p) - b + r;
+      return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+    }
+
+    float ibMask(vec2 uv) {
+      vec2 p = (uv - 0.5) * vec2(3.6, 1.0);
+      float i = roundedRect(p - vec2(-0.8, 0.0), vec2(0.12, 0.42), 0.05);
+      float bo = roundedRect(p - vec2(0.3, 0.0), vec2(0.38, 0.42), 0.08);
+      float bc1 = roundedRect(p - vec2(0.62, 0.15), vec2(0.12, 0.18), 0.1);
+      float bc2 = roundedRect(p - vec2(0.62, -0.15), vec2(0.12, 0.18), 0.1);
+      float b = max(bo, -min(bc1, bc2));
+      float shape = min(i, b);
+      return 1.0 - smoothstep(-0.01, 0.02, shape);
+    }
+
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p) {
+      vec2 i = floor(p); vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i+vec2(1,0)), f.x), mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), f.x), f.y);
+    }
+    float fbm(vec2 p) {
+      float v = 0.0, a = 0.5;
+      for (int i = 0; i < 5; i++) { v += a * noise(p); p = p * 2.1 + vec2(1.7, 9.2); a *= 0.5; }
+      return v;
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_resolution;
+      uv.y = 1.0 - uv.y;
+      float mask = ibMask(uv);
+      if (mask < 0.01) { gl_FragColor = vec4(0.0); return; }
+      float t = u_time;
+      vec2 mouse = u_mouse;
+      float n1 = fbm(uv * 3.0 + t * 0.2);
+      float n2 = fbm(uv * 6.0 - t * 0.15 + n1);
+      float flow = sin((uv.x * 5.0 + uv.y * 3.0 + t * 0.5 + n2 * 2.0) * 3.14159) * 0.5 + 0.5;
+      flow = pow(flow, 1.6);
+      vec3 lime   = vec3(0.784, 0.949, 0.188);
+      vec3 silver = vec3(0.82, 0.86, 0.92);
+      vec3 dark   = vec3(0.04, 0.05, 0.07);
+      vec3 white  = vec3(0.97, 0.98, 1.0);
+      vec3 color = mix(dark, silver, flow);
+      color = mix(color, lime, pow(flow, 3.5) * 0.7);
+      color = mix(color, white, pow(flow, 7.0) * 0.5);
+      float md = length(mouse - uv);
+      color += lime * 0.15 * exp(-md * md * 8.0);
+      color *= 0.88 + 0.12 * smoothstep(0.0, 0.15, mask);
+      gl_FragColor = vec4(color * mask, mask);
+    }
+  `;
+
+  function compile(src, type) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn('Shader error:', gl.getShaderInfoLog(s)); return null; }
+    return s;
+  }
+  const vs = compile(VS, gl.VERTEX_SHADER);
+  const fs = compile(FS, gl.FRAGMENT_SHADER);
+  if (!vs || !fs) { document.documentElement.classList.add('no-webgl'); return; }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes  = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+  gl.uniform2f(uRes, canvas.width, canvas.height);
+  gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  let mx = 0.5, my = 0.5;
+  document.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mx = (e.clientX - r.left) / r.width;
+    my = 1.0 - (e.clientY - r.top) / r.height;
+  });
+  let start = null;
+  function frame(ts) {
+    if (!start) start = ts;
+    gl.uniform1f(uTime, (ts - start) * 0.001);
+    gl.uniform2f(uMouse, mx, my);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* Text Pressure — cursor-reactive font weight on hero headline */
+(function() {
+  var el = document.getElementById('pressure-span');
+  if (!el) return;
+  document.addEventListener('mousemove', function(e) {
+    var rect = el.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var dx = (e.clientX - cx) / window.innerWidth;
+    var dy = (e.clientY - cy) / window.innerHeight;
+    var dist = Math.sqrt(dx*dx + dy*dy);
+    var weight = Math.round(400 + (1 - Math.min(dist * 2, 1)) * 400);
+    el.style.fontVariationSettings = '"wght" ' + weight;
+    el.style.letterSpacing = (-0.02 + dist * 0.04) + 'em';
+  });
+})();
 </script>
 </body>
 </html>
