@@ -2,9 +2,25 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/authority", "dest": "/authority.html" },
-    { "src": "/validate", "dest": "/tractionbuild.html" },
-    { "src": "/tractionbuild", "dest": "/tractionbuild.html" }
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/authority",
+      "dest": "/authority.html"
+    },
+    {
+      "src": "/validate",
+      "dest": "/tractionbuild.html"
+    },
+    {
+      "src": "/tractionbuild",
+      "dest": "/tractionbuild.html"
+    },
+    {
+      "src": "/intake",
+      "dest": "/intake.html"
+    }
   ]
 }
