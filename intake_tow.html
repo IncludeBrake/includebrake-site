@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heavy Duty Towing & Heavy Haul — Chatbot Intake Form</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Barlow:wght@400;500&display=swap');
+
+:root {
+–ink: #0f0f0e;
+–steel: #1c1f22;
+–panel: #242830;
+–rail: #2e333b;
+–muted: #6b7280;
+–ghost: #9ca3af;
+–line: #333840;
+–paper: #f4f2ee;
+–warm: #e8e4dc;
+–amber: #f0a030;
+–amber-dim: #2a1e08;
+–red: #c0392b;
+–red-dim: #2a0c08;
+–green: #2e7d52;
+–green-dim: #0a1f13;
+–blue: #2563a8;
+–blue-dim: #0d1f3a;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–steel);
+color: var(–paper);
+font-family: ‘Barlow’, sans-serif;
+font-size: 14px;
+line-height: 1.6;
+min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+background: var(–ink);
+border-bottom: 3px solid var(–amber);
+padding: 28px 32px 24px;
+}
+.header-inner { max-width: 820px; margin: 0 auto; }
+.brand {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 11px;
+color: var(–amber);
+letter-spacing: 0.12em;
+text-transform: uppercase;
+margin-bottom: 8px;
+}
+.title {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 32px;
+font-weight: 700;
+line-height: 1.1;
+letter-spacing: -0.01em;
+color: var(–paper);
+}
+.title span { color: var(–amber); }
+.subtitle {
+font-size: 13px;
+color: var(–ghost);
+margin-top: 6px;
+font-family: ‘IBM Plex Mono’, monospace;
+}
+
+/* PROGRESS */
+.progress-bar {
+background: var(–ink);
+border-bottom: 1px solid var(–line);
+padding: 0 32px;
+position: sticky;
+top: 0;
+z-index: 100;
+}
+.progress-inner {
+max-width: 820px;
+margin: 0 auto;
+display: flex;
+gap: 0;
+overflow-x: auto;
+}
+.prog-step {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 10px;
+color: var(–muted);
+padding: 10px 16px;
+white-space: nowrap;
+border-bottom: 2px solid transparent;
+transition: all .2s;
+cursor: pointer;
+letter-spacing: 0.05em;
+}
+.prog-step.active { color: var(–amber); border-bottom-color: var(–amber); }
+.prog-step:hover { color: var(–ghost); }
+
+/* FORM BODY */
+.form-body { max-width: 820px; margin: 0 auto; padding: 32px 32px 64px; }
+
+/* SECTION */
+.section {
+margin-bottom: 40px;
+display: none;
+}
+.section.visible { display: block; }
+
+.section-header {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 20px;
+padding-bottom: 12px;
+border-bottom: 1px solid var(–line);
+}
+.section-num {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 28px;
+font-weight: 700;
+color: var(–amber);
+line-height: 1;
+min-width: 32px;
+}
+.section-title {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 18px;
+font-weight: 600;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: var(–paper);
+}
+.section-desc {
+font-size: 12px;
+color: var(–ghost);
+margin-top: 2px;
+font-family: ‘IBM Plex Mono’, monospace;
+}
+
+/* FIELDS */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.field-grid.full { grid-template-columns: 1fr; }
+@media (max-width: 600px) {
+.field-grid, .field-grid.cols-3 { grid-template-columns: 1fr; }
+}
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field.span2 { grid-column: span 2; }
+@media (max-width: 600px) { .field.span2 { grid-column: span 1; } }
+
+label {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 10px;
+color: var(–ghost);
+letter-spacing: 0.08em;
+text-transform: uppercase;
+}
+label .req { color: var(–amber); margin-left: 2px; }
+label .hint {
+color: var(–muted);
+font-weight: 400;
+text-transform: none;
+letter-spacing: 0;
+display: block;
+font-size: 10px;
+margin-top: 1px;
+font-family: ‘Barlow’, sans-serif;
+}
+
+input[type=“text”],
+input[type=“tel”],
+input[type=“email”],
+input[type=“url”],
+input[type=“number”],
+select,
+textarea {
+background: var(–panel);
+border: 1px solid var(–rail);
+border-radius: 4px;
+color: var(–paper);
+font-family: ‘Barlow’, sans-serif;
+font-size: 14px;
+padding: 9px 12px;
+transition: border-color .15s, background .15s;
+width: 100%;
+appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+outline: none;
+border-color: var(–amber);
+background: #1e2227;
+}
+input::placeholder, textarea::placeholder { color: var(–muted); }
+select option { background: var(–panel); }
+textarea { resize: vertical; min-height: 80px; }
+
+/* CHECKBOX GROUP */
+.check-group {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 6px;
+}
+.check-group.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 600px) {
+.check-group, .check-group.cols-3 { grid-template-columns: 1fr; }
+}
+
+.check-item {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 9px 12px;
+background: var(–panel);
+border: 1px solid var(–rail);
+border-radius: 4px;
+cursor: pointer;
+transition: border-color .15s, background .15s;
+}
+.check-item:hover { border-color: var(–amber); background: #1e2227; }
+.check-item input[type=“checkbox”] {
+width: 16px; height: 16px;
+accent-color: var(–amber);
+cursor: pointer;
+flex-shrink: 0;
+padding: 0;
+}
+.check-item span {
+font-size: 13px;
+color: var(–paper);
+line-height: 1.3;
+}
+.check-item span small {
+display: block;
+font-size: 11px;
+color: var(–ghost);
+font-family: ‘IBM Plex Mono’, monospace;
+}
+.check-item.checked { border-color: var(–amber); background: var(–amber-dim); }
+
+/* RADIO GROUP */
+.radio-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.radio-item {
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 8px 14px;
+background: var(–panel);
+border: 1px solid var(–rail);
+border-radius: 4px;
+cursor: pointer;
+transition: all .15s;
+}
+.radio-item:hover { border-color: var(–amber); }
+.radio-item input[type=“radio”] { accent-color: var(–amber); }
+.radio-item.checked { border-color: var(–amber); background: var(–amber-dim); color: var(–amber); }
+.radio-item span { font-size: 13px; }
+
+/* FLAG BOXES */
+.flag-box {
+border-radius: 4px;
+padding: 12px 14px;
+display: flex;
+gap: 10px;
+align-items: flex-start;
+margin-top: 6px;
+}
+.flag-box.warn { background: var(–amber-dim); border-left: 3px solid var(–amber); }
+.flag-box.danger { background: var(–red-dim); border-left: 3px solid var(–red); }
+.flag-box.info { background: var(–blue-dim); border-left: 3px solid var(–blue); }
+.flag-box-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.flag-box-text { font-size: 12px; color: var(–ghost); line-height: 1.5; }
+.flag-box-text strong { color: var(–paper); display: block; margin-bottom: 2px; font-size: 12px; }
+
+/* DIVIDER */
+.sub-divider {
+height: 1px;
+background: var(–line);
+margin: 18px 0;
+}
+.sub-label {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 10px;
+color: var(–amber);
+letter-spacing: 0.1em;
+text-transform: uppercase;
+margin-bottom: 10px;
+}
+
+/* NAV BUTTONS */
+.nav-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 28px;
+padding-top: 20px;
+border-top: 1px solid var(–line);
+}
+.btn {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+padding: 11px 28px;
+border-radius: 4px;
+cursor: pointer;
+border: none;
+transition: all .15s;
+}
+.btn-ghost {
+background: transparent;
+color: var(–muted);
+border: 1px solid var(–rail);
+}
+.btn-ghost:hover { color: var(–paper); border-color: var(–ghost); }
+.btn-primary {
+background: var(–amber);
+color: var(–ink);
+}
+.btn-primary:hover { background: #f5b040; }
+.btn-submit {
+background: var(–green);
+color: #fff;
+}
+.btn-submit:hover { background: #38915e; }
+
+.step-counter {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+}
+.step-counter span { color: var(–amber); }
+
+/* SUMMARY SCREEN */
+.summary-screen { display: none; }
+.summary-screen.visible { display: block; }
+.summary-box {
+background: var(–panel);
+border: 1px solid var(–line);
+border-radius: 6px;
+padding: 24px;
+margin-bottom: 16px;
+}
+.summary-section-title {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 14px;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: var(–amber);
+margin-bottom: 12px;
+}
+.summary-row {
+display: flex;
+gap: 12px;
+padding: 6px 0;
+border-bottom: 1px solid var(–line);
+font-size: 13px;
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-key {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 11px;
+color: var(–ghost);
+min-width: 180px;
+padding-top: 1px;
+}
+.summary-val { color: var(–paper); flex: 1; }
+
+.success-banner {
+background: var(–green-dim);
+border: 1px solid var(–green);
+border-radius: 6px;
+padding: 20px 24px;
+text-align: center;
+margin-bottom: 24px;
+}
+.success-banner h2 {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 22px;
+font-weight: 700;
+color: #5ecf91;
+margin-bottom: 4px;
+}
+.success-banner p { font-size: 13px; color: var(–ghost); }
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">IncludeBrake — Client Intake</div>
+    <div class="title">Heavy Duty Towing &amp; <span>Heavy Haul</span> Intake Form</div>
+    <div class="subtitle">// AI chatbot build · 9 sections · ~12 minutes</div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-inner" id="progress-inner">
+    <div class="prog-step active" data-step="0">01 Business</div>
+    <div class="prog-step" data-step="1">02 Services</div>
+    <div class="prog-step" data-step="2">03 Fleet</div>
+    <div class="prog-step" data-step="3">04 Area</div>
+    <div class="prog-step" data-step="4">05 Dispatch</div>
+    <div class="prog-step" data-step="5">06 Rates</div>
+    <div class="prog-step" data-step="6">07 Compliance</div>
+    <div class="prog-step" data-step="7">08 Escalation</div>
+    <div class="prog-step" data-step="8">09 Leads</div>
+  </div>
+</div>
+
+<div class="form-body">
+
+  <!-- ===== SECTION 1: BUSINESS BASICS ===== -->
+
+  <div class="section visible" id="section-0">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <div class="section-title">Business Basics</div>
+        <div class="section-desc">// core identity — what the bot introduces itself as</div>
+      </div>
+    </div>
+
+```
+<div class="field-grid">
+  <div class="field span2">
+    <label>Company legal name <span class="req">*</span></label>
+    <input type="text" id="biz_name" placeholder="e.g. Upstate Heavy Haul LLC">
+  </div>
+  <div class="field">
+    <label>DBA / operating name <span class="hint">if different from legal name</span></label>
+    <input type="text" id="biz_dba" placeholder="e.g. Upstate Towing">
+  </div>
+  <div class="field">
+    <label>Primary phone number <span class="req">*</span><span class="hint">the number the bot routes callers to</span></label>
+    <input type="tel" id="biz_phone" placeholder="(864) 555-0100">
+  </div>
+  <div class="field">
+    <label>Website URL</label>
+    <input type="url" id="biz_website" placeholder="https://upstateheavy.com">
+  </div>
+  <div class="field">
+    <label>Primary email</label>
+    <input type="email" id="biz_email" placeholder="dispatch@company.com">
+  </div>
+  <div class="field">
+    <label>Owner / contact name <span class="req">*</span></label>
+    <input type="text" id="biz_owner" placeholder="Full name">
+  </div>
+  <div class="field">
+    <label>Owner cell (for alerts) <span class="req">*</span><span class="hint">receives lead SMS alerts</span></label>
+    <input type="tel" id="biz_owner_cell" placeholder="(864) 555-0199">
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Company description</div>
+
+<div class="field-grid full">
+  <div class="field">
+    <label>How would you describe your company in 2–3 sentences? <span class="req">*</span><span class="hint">the bot uses this to introduce your business to callers</span></label>
+    <textarea id="biz_desc" placeholder="e.g. Upstate Heavy Haul is a family-owned towing and transport company serving the Carolinas since 2008. We specialize in commercial vehicle recovery, semi-truck towing, and permitted oversize load transport. We run 24/7 dispatch with 6 trucks in the fleet."></textarea>
+  </div>
+  <div class="field">
+    <label>What makes you different from other towers or haulers in your area?<span class="hint">the bot's answer when callers ask "why you?"</span></label>
+    <textarea id="biz_differentiator" placeholder="e.g. We own a 75-ton rotator — most competitors call us for jobs they can't handle. Our drivers are all certified heavy recovery operators with 10+ years experience."></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <div class="step-counter">Step <span>1</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(1)">Next: Services →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 2: SERVICES ===== -->
+
+  <div class="section" id="section-1">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <div class="section-title">Services Offered</div>
+        <div class="section-desc">// check every service your company actively takes calls for</div>
+      </div>
+    </div>
+
+```
+<div class="sub-label">Towing &amp; Recovery</div>
+<div class="check-group">
+  <label class="check-item"><input type="checkbox" class="svc" value="heavy_tow"><span>Heavy duty towing<small>Class 7–8 trucks, semis, trailers</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="medium_tow"><span>Medium duty towing<small>Box trucks, RVs, buses, Class 4–6</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="light_tow"><span>Light duty towing<small>Passenger vehicles, pickups</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="heavy_recovery"><span>Heavy recovery / extraction<small>Overturned semis, off-road recovery</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="rotator"><span>Rotator / crane recovery<small>Complex uprighting and extractions</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="winching"><span>Winching & pull-out<small>Stuck vehicles, mud, ditches</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="cargo_recovery"><span>Cargo recovery / reload<small>Spilled or shifted freight</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="accident_scene"><span>Accident scene cleanup<small>Fluid recovery, debris removal</small></span></label>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Heavy Haul &amp; Transport</div>
+<div class="check-group">
+  <label class="check-item"><input type="checkbox" class="svc" value="oversize_permitted"><span>Oversize / overweight transport<small>Permitted loads, pilot car coordination</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="lowboy"><span>Lowboy transport<small>Heavy equipment, construction machinery</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="rgn"><span>RGN / removable gooseneck<small>Bulldozers, excavators, cranes</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="flatbed"><span>Flatbed transport<small>Machinery, vehicles, structural steel</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="step_deck"><span>Step deck / drop deck<small>Tall machinery, agricultural equipment</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="equipment_transport"><span>Construction equipment transport<small>Loaders, graders, compactors</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="modular"><span>Modular / structural moves<small>Buildings, tank sections, large assemblies</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="landoll"><span>Landoll / tilt-deck<small>Self-loading, ground-level access</small></span></label>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Specialty &amp; On-Site Services</div>
+<div class="check-group">
+  <label class="check-item"><input type="checkbox" class="svc" value="jump_start"><span>Jump start / battery service</span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="fuel_delivery"><span>Fuel delivery (diesel)</span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="tire_change"><span>Tire change / mobile tire service</span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="lockout"><span>Lockout service</span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="load_securement"><span>Load securement / strapping<small>On-site before transport</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="storage"><span>Impound / secured storage<small>Yard storage available</small></span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="police_contract"><span>Police / municipal contract towing</span></label>
+  <label class="check-item"><input type="checkbox" class="svc" value="fleet_account"><span>Fleet account / commercial contract</span></label>
+</div>
+
+<div class="sub-divider"></div>
+<div class="field-grid full">
+  <div class="field">
+    <label>Any services you do NOT offer that callers often ask about?<span class="hint">helps the bot redirect these calls correctly</span></label>
+    <textarea id="svc_not_offered" placeholder="e.g. We don't do motorcycle towing. We don't handle driveaway/repo. We don't transport hazmat loads." style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(0)">← Back</button>
+  <div class="step-counter">Step <span>2</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(2)">Next: Fleet →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 3: FLEET & CAPACITY ===== -->
+
+  <div class="section" id="section-2">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <div class="section-title">Fleet &amp; Capacity</div>
+        <div class="section-desc">// the bot uses this to set accurate expectations for callers</div>
+      </div>
+    </div>
+
+```
+<div class="flag-box warn">
+  <div class="flag-box-icon">⚠</div>
+  <div class="flag-box-text"><strong>Why this matters</strong>Callers will ask "can you handle a 90,000-lb extractor?" The bot needs real capacity numbers to answer correctly — or know when to escalate to you.</div>
+</div>
+
+<div style="margin-top:18px"></div>
+<div class="sub-label">Fleet overview</div>
+<div class="field-grid cols-3">
+  <div class="field">
+    <label>Total trucks in fleet <span class="req">*</span></label>
+    <input type="number" id="fleet_total" placeholder="6" min="1">
+  </div>
+  <div class="field">
+    <label>Heavy duty units</label>
+    <input type="number" id="fleet_heavy" placeholder="3" min="0">
+  </div>
+  <div class="field">
+    <label>Rotator units</label>
+    <input type="number" id="fleet_rotator" placeholder="1" min="0">
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Capacity limits</div>
+<div class="field-grid">
+  <div class="field">
+    <label>Max towing capacity (GVW) <span class="req">*</span><span class="hint">e.g. "80 tons" or "160,000 lbs"</span></label>
+    <input type="text" id="cap_max_tow" placeholder="e.g. 75 tons / 150,000 lbs">
+  </div>
+  <div class="field">
+    <label>Rotator lifting capacity<span class="hint">leave blank if no rotator</span></label>
+    <input type="text" id="cap_rotator" placeholder="e.g. 75-ton Rotator — 150,000 lbs">
+  </div>
+  <div class="field">
+    <label>Max transport load (legal + permitted) <span class="hint">oversize/overweight transport max</span></label>
+    <input type="text" id="cap_transport" placeholder="e.g. up to 200,000 lbs with permits">
+  </div>
+  <div class="field">
+    <label>Max trailer/load length</label>
+    <input type="text" id="cap_length" placeholder="e.g. up to 120 ft with pilot cars">
+  </div>
+  <div class="field">
+    <label>Max load width</label>
+    <input type="text" id="cap_width" placeholder="e.g. up to 16 ft wide">
+  </div>
+  <div class="field">
+    <label>Max load height</label>
+    <input type="text" id="cap_height" placeholder="e.g. up to 14 ft 6 in clearance">
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Key equipment (list your most noteworthy assets)</div>
+<div class="field-grid full">
+  <div class="field">
+    <label>Notable equipment callers should know about<span class="hint">helps the bot answer "can you handle X?" questions confidently</span></label>
+    <textarea id="fleet_notable" placeholder="e.g. 75-ton Century rotator, 50-ton underlift integrated wrecker, 48-ft RGN lowboy, 53-ft Landoll tilt deck, two Kenworth T880 heavy units"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(1)">← Back</button>
+  <div class="step-counter">Step <span>3</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(3)">Next: Area →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 4: SERVICE AREA ===== -->
+
+  <div class="section" id="section-3">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div>
+        <div class="section-title">Service Area &amp; Coverage</div>
+        <div class="section-desc">// the bot uses this to qualify callers before collecting full lead info</div>
+      </div>
+    </div>
+
+```
+<div class="field-grid">
+  <div class="field">
+    <label>Primary dispatch location / city <span class="req">*</span></label>
+    <input type="text" id="area_base" placeholder="e.g. Spartanburg, SC">
+  </div>
+  <div class="field">
+    <label>Base zip code</label>
+    <input type="text" id="area_zip" placeholder="29303">
+  </div>
+  <div class="field span2">
+    <label>Standard local service radius <span class="req">*</span><span class="hint">towing response radius at standard rates</span></label>
+    <input type="text" id="area_local_radius" placeholder="e.g. 75-mile radius from Spartanburg">
+  </div>
+  <div class="field span2">
+    <label>Long-haul / interstate transport coverage <span class="hint">for heavy haul transport — how far will you go?</span></label>
+    <input type="text" id="area_haul_range" placeholder="e.g. Southeast US (SC, NC, GA, TN, VA, FL). Nationwide on large jobs with advance notice.">
+  </div>
+  <div class="field span2">
+    <label>Named counties, cities, or corridors you cover <span class="hint">specific enough for the bot to confirm coverage instantly</span></label>
+    <textarea id="area_named" placeholder="e.g. Spartanburg, Cherokee, York, Union, Greenville counties in SC. I-85, I-26, I-85 corridor. Charlotte metro on heavy jobs." style="min-height:64px"></textarea>
+  </div>
+  <div class="field span2">
+    <label>Areas you do NOT cover or refer out<span class="hint">so the bot doesn't waste time on leads outside your range</span></label>
+    <textarea id="area_excluded" placeholder="e.g. We don't go north of Charlotte for light towing. We refer out Myrtle Beach area." style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Out-of-area policy</div>
+<div class="field-grid full">
+  <div class="field">
+    <label>What should the bot say to a caller who is outside your area?</label>
+    <textarea id="area_out_of_area" placeholder="e.g. For callers outside our service area, let them know we only cover the Upstate SC / western NC region. For heavy haul transport jobs, give them our office number — we do statewide and regional transport on larger scheduled jobs." style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(2)">← Back</button>
+  <div class="step-counter">Step <span>4</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(4)">Next: Dispatch →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 5: DISPATCH & HOURS ===== -->
+
+  <div class="section" id="section-4">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div>
+        <div class="section-title">Dispatch &amp; Hours</div>
+        <div class="section-desc">// defines when the bot routes live vs captures for callback</div>
+      </div>
+    </div>
+
+```
+<div class="sub-label">Availability</div>
+<div class="field-grid">
+  <div class="field">
+    <label>Do you offer 24/7 emergency dispatch? <span class="req">*</span></label>
+    <div class="radio-group" id="dispatch_24_7">
+      <label class="radio-item"><input type="radio" name="dispatch247" value="yes"> <span>Yes — 24/7</span></label>
+      <label class="radio-item"><input type="radio" name="dispatch247" value="on_call"> <span>On-call after hours</span></label>
+      <label class="radio-item"><input type="radio" name="dispatch247" value="no"> <span>Business hours only</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <label>Standard business hours <span class="hint">e.g. Mon–Fri 7am–6pm, Sat 8am–2pm</span></label>
+    <input type="text" id="dispatch_hours" placeholder="Mon–Fri 7am–6pm, Sat 8am–3pm">
+  </div>
+  <div class="field">
+    <label>Dispatch phone (if different from main) <span class="hint">the number a driver or dispatcher answers</span></label>
+    <input type="tel" id="dispatch_phone" placeholder="(864) 555-0101">
+  </div>
+  <div class="field">
+    <label>After-hours emergency contact</label>
+    <input type="tel" id="dispatch_after_hours" placeholder="(864) 555-0199 — owner cell">
+  </div>
+  <div class="field span2">
+    <label>Typical response time for emergency calls<span class="hint">what the bot quotes to anxious callers</span></label>
+    <input type="text" id="dispatch_eta" placeholder="e.g. 45–90 minutes within 50 miles. Heavy recovery jobs: 60–120 min depending on crew and equipment needed.">
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Scheduling for heavy haul / transport jobs</div>
+<div class="field-grid">
+  <div class="field">
+    <label>Advance notice required for permitted heavy haul? <span class="req">*</span></label>
+    <input type="text" id="dispatch_permit_lead" placeholder="e.g. 48–72 hours minimum for oversize. Same-day on local non-permitted moves.">
+  </div>
+  <div class="field">
+    <label>How should the bot handle transport quote requests?</label>
+    <select id="dispatch_quote_handling">
+      <option value="">— select —</option>
+      <option value="capture_callback">Capture details + call them back to quote</option>
+      <option value="email_quote">Direct to email for quote request</option>
+      <option value="schedule_consult">Schedule a 10-min call to go over job specs</option>
+      <option value="website_form">Send to website form</option>
+    </select>
+  </div>
+  <div class="field span2">
+    <label>Minimum info needed before you'll give a transport quote<span class="hint">the bot will collect these before routing to you</span></label>
+    <textarea id="dispatch_quote_info" placeholder="e.g. Origin and destination, load dimensions (L x W x H), weight, type of equipment, desired move date, and whether they need loading/securement help on our end." style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(3)">← Back</button>
+  <div class="step-counter">Step <span>5</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(5)">Next: Rates →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 6: RATES & PRICING ===== -->
+
+  <div class="section" id="section-5">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div>
+        <div class="section-title">Rates &amp; Pricing</div>
+        <div class="section-desc">// the bot never quotes exact prices — only confirms what to expect</div>
+      </div>
+    </div>
+
+```
+<div class="flag-box warn">
+  <div class="flag-box-icon">⚠</div>
+  <div class="flag-box-text"><strong>Bot pricing rule</strong>The bot never quotes hard prices. It acknowledges that pricing exists, explains how it's structured, and routes quote requests to you. Fill in what you're comfortable the bot acknowledging.</div>
+</div>
+
+<div style="margin-top:18px"></div>
+<div class="sub-label">Towing rates structure</div>
+<div class="field-grid">
+  <div class="field">
+    <label>How do you charge for towing? <span class="req">*</span></label>
+    <div class="radio-group" id="rate_tow_type">
+      <label class="radio-item"><input type="radio" name="rateTowType" value="hook_mile"> <span>Hook-up fee + per mile</span></label>
+      <label class="radio-item"><input type="radio" name="rateTowType" value="hourly"> <span>Hourly rate</span></label>
+      <label class="radio-item"><input type="radio" name="rateTowType" value="flat"> <span>Flat rate by job</span></label>
+      <label class="radio-item"><input type="radio" name="rateTowType" value="varies"> <span>Varies by job type</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <label>Is there an after-hours or weekend surcharge?</label>
+    <div class="radio-group" id="rate_surcharge">
+      <label class="radio-item"><input type="radio" name="rateSurcharge" value="yes"> <span>Yes</span></label>
+      <label class="radio-item"><input type="radio" name="rateSurcharge" value="no"> <span>No</span></label>
+    </div>
+  </div>
+  <div class="field span2">
+    <label>What should the bot say when asked for a towing price?<span class="hint">write the actual script line</span></label>
+    <textarea id="rate_tow_script" placeholder="e.g. &quot;Towing rates depend on the vehicle type, weight, and distance. Our dispatcher will give you an exact quote when they confirm availability — usually within 10 minutes. There's no obligation until you approve it.&quot;" style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Heavy haul / transport rates</div>
+<div class="field-grid">
+  <div class="field">
+    <label>How do you charge for transport? <span class="req">*</span></label>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="rateHaulType" value="per_mile"> <span>Per loaded mile</span></label>
+      <label class="radio-item"><input type="radio" name="rateHaulType" value="flat_job"> <span>Flat rate per job</span></label>
+      <label class="radio-item"><input type="radio" name="rateHaulType" value="hourly"> <span>Hourly + fuel</span></label>
+      <label class="radio-item"><input type="radio" name="rateHaulType" value="custom"> <span>Custom quote always</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <label>Permit costs — included or passed through?</label>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="ratePermit" value="included"> <span>Included in quote</span></label>
+      <label class="radio-item"><input type="radio" name="ratePermit" value="passthrough"> <span>Passed through at cost</span></label>
+      <label class="radio-item"><input type="radio" name="ratePermit" value="varies"> <span>Varies by job</span></label>
+    </div>
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Payment &amp; accounts</div>
+<div class="field-grid">
+  <div class="field">
+    <label>Accepted payment methods</label>
+    <div class="check-group">
+      <label class="check-item"><input type="checkbox" class="pay" value="cash"> <span>Cash</span></label>
+      <label class="check-item"><input type="checkbox" class="pay" value="check"> <span>Check</span></label>
+      <label class="check-item"><input type="checkbox" class="pay" value="card"> <span>Credit / debit card</span></label>
+      <label class="check-item"><input type="checkbox" class="pay" value="ach"> <span>ACH / bank transfer</span></label>
+      <label class="check-item"><input type="checkbox" class="pay" value="net30"> <span>Net 30 (fleet accounts)</span></label>
+      <label class="check-item"><input type="checkbox" class="pay" value="insurance"> <span>Direct insurance billing</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <label>Do you offer fleet / commercial accounts?</label>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="rateFleet" value="yes"> <span>Yes</span></label>
+      <label class="radio-item"><input type="radio" name="rateFleet" value="no"> <span>No</span></label>
+    </div>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(4)">← Back</button>
+  <div class="step-counter">Step <span>6</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(6)">Next: Compliance →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 7: COMPLIANCE ===== -->
+
+  <div class="section" id="section-6">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div>
+        <div class="section-title">Compliance &amp; Credentials</div>
+        <div class="section-desc">// callers ask about insurance and permits — the bot needs to confirm without overpromising</div>
+      </div>
+    </div>
+
+```
+<div class="field-grid">
+  <div class="field">
+    <label>USDOT number <span class="hint">if applicable</span></label>
+    <input type="text" id="comp_dot" placeholder="USDOT 1234567">
+  </div>
+  <div class="field">
+    <label>MC number (motor carrier) <span class="hint">if applicable</span></label>
+    <input type="text" id="comp_mc" placeholder="MC-123456">
+  </div>
+  <div class="field">
+    <label>SC towing license / state license <span class="hint">license # or just confirm yes/no</span></label>
+    <input type="text" id="comp_state_lic" placeholder="Licensed in SC, NC, GA">
+  </div>
+  <div class="field">
+    <label>Liability insurance coverage <span class="hint">what the bot can confirm to callers</span></label>
+    <input type="text" id="comp_insurance" placeholder="e.g. $1M general liability, cargo insured">
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Oversize / overweight permit capabilities</div>
+<div class="field-grid">
+  <div class="field">
+    <label>Do you pull your own oversize permits? <span class="req">*</span></label>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="compPermits" value="yes_self"> <span>Yes — we handle permits</span></label>
+      <label class="radio-item"><input type="radio" name="compPermits" value="yes_broker"> <span>Yes — via permit broker</span></label>
+      <label class="radio-item"><input type="radio" name="compPermits" value="client"> <span>Client provides permits</span></label>
+      <label class="radio-item"><input type="radio" name="compPermits" value="no"> <span>No — we don't do permitted loads</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <label>Do you coordinate pilot cars / escort vehicles?</label>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="compPilot" value="yes_own"> <span>Yes — we own pilot cars</span></label>
+      <label class="radio-item"><input type="radio" name="compPilot" value="yes_sub"> <span>Yes — we coordinate subcontractors</span></label>
+      <label class="radio-item"><input type="radio" name="compPilot" value="client"> <span>Client arranges pilot cars</span></label>
+      <label class="radio-item"><input type="radio" name="compPilot" value="na"> <span>N/A — no permitted loads</span></label>
+    </div>
+  </div>
+  <div class="field span2">
+    <label>States you're permitted / authorized to operate in<span class="hint">the bot uses this when callers ask about multi-state hauls</span></label>
+    <input type="text" id="comp_states" placeholder="e.g. SC, NC, GA, TN, VA — additional states on a per-job permit basis">
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Hazmat &amp; special restrictions</div>
+<div class="field-grid">
+  <div class="field">
+    <label>Do you handle hazmat loads? <span class="req">*</span></label>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="compHazmat" value="yes"> <span>Yes — certified</span></label>
+      <label class="radio-item"><input type="radio" name="compHazmat" value="limited"> <span>Limited — non-bulk only</span></label>
+      <label class="radio-item"><input type="radio" name="compHazmat" value="no"> <span>No — refer out</span></label>
+    </div>
+  </div>
+  <div class="field span2">
+    <label>Any load types or jobs you will not take?<span class="hint">the bot needs to know what to decline and possibly redirect</span></label>
+    <textarea id="comp_exclusions" placeholder="e.g. No explosives or Class 1 hazmat. No nuclear/radioactive material. No live animals. No repo work." style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(5)">← Back</button>
+  <div class="step-counter">Step <span>7</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(7)">Next: Escalation →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 8: ESCALATION ===== -->
+
+  <div class="section" id="section-7">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div>
+        <div class="section-title">Escalation &amp; Emergency Logic</div>
+        <div class="section-desc">// these are the hard stops — the bot must handle these before anything else</div>
+      </div>
+    </div>
+
+```
+<div class="flag-box danger">
+  <div class="flag-box-icon">🚨</div>
+  <div class="flag-box-text"><strong>Critical section</strong>Heavy duty recovery scenes can involve active hazards. Define hard escalation triggers so the bot immediately routes to you — not a lead form.</div>
+</div>
+
+<div style="margin-top:18px"></div>
+<div class="sub-label">Auto-escalate triggers (bot alerts you immediately)</div>
+<div class="check-group">
+  <label class="check-item"><input type="checkbox" class="esc" value="rollover"> <span>Rollover / overturned vehicle on active roadway<small>Immediate dispatch, notify you by SMS</small></span></label>
+  <label class="check-item"><input type="checkbox" class="esc" value="fire"> <span>Vehicle fire or smoke<small>Bot routes to 911 first, then you</small></span></label>
+  <label class="check-item"><input type="checkbox" class="esc" value="fuel_spill"> <span>Fuel or fluid spill on roadway<small>May require hazmat notification</small></span></label>
+  <label class="check-item"><input type="checkbox" class="esc" value="blocking_highway"> <span>Blocking highway / interstate<small>Priority dispatch — traffic safety</small></span></label>
+  <label class="check-item"><input type="checkbox" class="esc" value="injured"> <span>Injured occupants still in vehicle<small>911 first, then you</small></span></label>
+  <label class="check-item"><input type="checkbox" class="esc" value="power_lines"> <span>Downed power lines near vehicle<small>Utility company + 911 before dispatch</small></span></label>
+  <label class="check-item"><input type="checkbox" class="esc" value="load_spill"> <span>Cargo spill blocking traffic<small>May need road closure coordination</small></span></label>
+  <label class="check-item"><input type="checkbox" class="esc" value="large_recovery"> <span>Large recovery requiring rotator<small>Route to you — need to assess crew and ETA</small></span></label>
+</div>
+
+<div class="sub-divider"></div>
+<div class="field-grid">
+  <div class="field span2">
+    <label>Emergency call-back number (the one the bot reads to callers in a hard-stop situation) <span class="req">*</span></label>
+    <input type="tel" id="esc_emergency_num" placeholder="(864) 555-0199">
+  </div>
+  <div class="field span2">
+    <label>What should the bot say when an emergency call comes in after hours and dispatch is not immediately available?<span class="hint">write the actual script</span></label>
+    <textarea id="esc_after_hours_script" placeholder="e.g. &quot;This sounds like an emergency situation. If there are any injuries or active hazards, call 911 first. I'm flagging this as a priority right now — someone from our crew will call you back within 10 minutes. The direct emergency line is [number]. Please stay on the line or call that number directly.&quot;" style="min-height:80px"></textarea>
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Non-emergency calls the bot should still route directly to you</div>
+<div class="field-grid full">
+  <div class="field">
+    <label>Describe any job types where the bot should skip the lead form and just get you on the phone<span class="hint">e.g. large jobs, insurance adjusters, police departments, fleet managers</span></label>
+    <textarea id="esc_route_direct" placeholder="e.g. Police/state patrol calls — route immediately. Insurance adjuster calls — route to owner. Any job over 100,000 lbs — route to owner to assess. Fleet account managers — skip bot, connect to dispatcher." style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(6)">← Back</button>
+  <div class="step-counter">Step <span>8</span> of 9</div>
+  <button class="btn btn-primary" onclick="goTo(8)">Next: Lead Definition →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SECTION 9: LEAD DEFINITION ===== -->
+
+  <div class="section" id="section-8">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div>
+        <div class="section-title">Lead Definition &amp; FAQs</div>
+        <div class="section-desc">// tells the bot what to capture and what to say to common questions</div>
+      </div>
+    </div>
+
+```
+<div class="sub-label">What does a good lead look like for you?</div>
+<div class="field-grid">
+  <div class="field span2">
+    <label>Best-case caller <span class="req">*</span><span class="hint">describe your ideal inbound lead so the bot knows what to prioritize</span></label>
+    <textarea id="lead_ideal" placeholder="e.g. A trucking company dispatcher or fleet manager calling about a broken-down semi or overturned trailer within 75 miles. Or a contractor needing to move heavy equipment to a job site within the week." style="min-height:64px"></textarea>
+  </div>
+  <div class="field">
+    <label>What callers are NOT worth taking?<span class="hint">the bot deprioritizes or declines these</span></label>
+    <textarea id="lead_bad" placeholder="e.g. Passenger car owners looking for a basic tow who balk at heavy duty rates. Callers 200+ miles away looking for light duty service." style="min-height:64px"></textarea>
+  </div>
+  <div class="field">
+    <label>Most common questions callers ask that stump your staff<span class="hint">will become FAQ entries in the bot</span></label>
+    <textarea id="lead_faq" placeholder="e.g. &quot;Can you tow a fully loaded flatbed?&quot; / &quot;Do you pull permits for oversize loads?&quot; / &quot;How much is it to tow a semi 200 miles?&quot; / &quot;Can you upright an overturned trailer?&quot;" style="min-height:64px"></textarea>
+  </div>
+</div>
+
+<div class="sub-divider"></div>
+<div class="sub-label">Lead capture fields (what the bot collects before routing)</div>
+<div class="check-group cols-3">
+  <label class="check-item"><input type="checkbox" class="lcap" value="name" checked><span>Caller name</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="phone" checked><span>Callback phone</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="location" checked><span>Vehicle / load location</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="destination"><span>Destination</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="vehicle_type" checked><span>Vehicle / load type</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="weight"><span>Estimated weight / GVW</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="issue_desc" checked><span>Description of situation</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="urgency" checked><span>Urgency (emergency vs scheduled)</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="company_name"><span>Company / fleet name</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="insurance_co"><span>Insurance company</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="po_number"><span>PO / job number</span></label>
+  <label class="check-item"><input type="checkbox" class="lcap" value="dimensions"><span>Load dimensions (H/W/L)</span></label>
+</div>
+
+<div class="sub-divider"></div>
+<div class="field-grid">
+  <div class="field">
+    <label>Anything else the bot should know that we haven't asked?</label>
+    <textarea id="lead_extra" placeholder="e.g. We have a contract with SC DOT — always confirm SC DOT callers and route immediately. We use Towbook for job tracking. Don't mention competitors by name." style="min-height:80px"></textarea>
+  </div>
+  <div class="field">
+    <label>Brand voice / personality notes<span class="hint">how should the bot sound?</span></label>
+    <textarea id="lead_voice" placeholder="e.g. Direct, no-nonsense, professional. These callers are often stressed — skip the fluff. Don't over-apologize. Give direct answers." style="min-height:80px"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="goTo(7)">← Back</button>
+  <div class="step-counter">Step <span>9</span> of 9</div>
+  <button class="btn btn-submit" onclick="submitForm()">✓ Submit Intake</button>
+</div>
+```
+
+  </div>
+
+  <!-- ===== SUMMARY ===== -->
+
+  <div class="summary-screen" id="summary-screen">
+    <div class="success-banner">
+      <h2>✓ Intake Received</h2>
+      <p>IncludeBrake will begin your build within 1 business day. Questions? Reply to your intake confirmation email.</p>
+    </div>
+    <div id="summary-content"></div>
+    <div style="margin-top:20px; text-align:center">
+      <button class="btn btn-ghost" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  let currentStep = 0;
+  const totalSteps = 9;
+
+  // Checkbox active state
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', function() {
+      this.closest('.check-item').classList.toggle('checked', this.checked);
+    });
+  });
+  document.querySelectorAll('.radio-item input[type="radio"]').forEach(rb => {
+    rb.addEventListener('change', function() {
+      document.querySelectorAll(`input[name="${this.name}"]`).forEach(r => {
+        r.closest('.radio-item').classList.toggle('checked', r.checked);
+      });
+    });
+  });
+
+  function goTo(step) {
+    document.getElementById(`section-${currentStep}`).classList.remove('visible');
+    currentStep = step;
+    document.getElementById(`section-${currentStep}`).classList.add('visible');
+    document.querySelectorAll('.prog-step').forEach(s => {
+      s.classList.toggle('active', parseInt(s.dataset.step) === currentStep);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.prog-step').forEach(s => {
+    s.addEventListener('click', () => goTo(parseInt(s.dataset.step)));
+  });
+
+  function getChecked(cls) {
+    return Array.from(document.querySelectorAll(`.${cls}:checked`)).map(c => c.value).join(', ') || '—';
+  }
+
+  function val(id) {
+    const el = document.getElementById(id);
+    return el ? (el.value.trim() || '—') : '—';
+  }
+
+  function getRadio(name) {
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    return checked ? checked.value : '—';
+  }
+
+  function submitForm() {
+    const bizName = val('biz_name');
+    if (bizName === '—') {
+      alert('Please fill in at least the company name (Section 1) before submitting.');
+      goTo(0);
+      return;
+    }
+
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    const summary = document.getElementById('summary-screen');
+    summary.classList.add('visible');
+
+    // Build summary
+    const sections = [
+      { title: 'Business Basics', rows: [
+        ['Company Name', val('biz_name')],
+        ['DBA', val('biz_dba')],
+        ['Phone', val('biz_phone')],
+        ['Website', val('biz_website')],
+        ['Owner', val('biz_owner')],
+        ['Owner Cell', val('biz_owner_cell')],
+        ['Description', val('biz_desc')],
+        ['Differentiator', val('biz_differentiator')],
+      ]},
+      { title: 'Services Offered', rows: [
+        ['Services', getChecked('svc')],
+        ['Not Offered', val('svc_not_offered')],
+      ]},
+      { title: 'Fleet & Capacity', rows: [
+        ['Total Trucks', val('fleet_total')],
+        ['Heavy Units', val('fleet_heavy')],
+        ['Rotator Units', val('fleet_rotator')],
+        ['Max Tow Capacity', val('cap_max_tow')],
+        ['Rotator Capacity', val('cap_rotator')],
+        ['Max Transport', val('cap_transport')],
+        ['Max Length', val('cap_length')],
+        ['Max Width', val('cap_width')],
+        ['Max Height', val('cap_height')],
+        ['Notable Equipment', val('fleet_notable')],
+      ]},
+      { title: 'Service Area', rows: [
+        ['Base City', val('area_base')],
+        ['Base Zip', val('area_zip')],
+        ['Local Radius', val('area_local_radius')],
+        ['Haul Range', val('area_haul_range')],
+        ['Named Coverage', val('area_named')],
+        ['Excluded Areas', val('area_excluded')],
+        ['Out-of-Area Policy', val('area_out_of_area')],
+      ]},
+      { title: 'Dispatch & Hours', rows: [
+        ['24/7 Dispatch', getRadio('dispatch247')],
+        ['Business Hours', val('dispatch_hours')],
+        ['Dispatch Phone', val('dispatch_phone')],
+        ['After-Hours Contact', val('dispatch_after_hours')],
+        ['Typical ETA', val('dispatch_eta')],
+        ['Permit Lead Time', val('dispatch_permit_lead')],
+        ['Quote Handling', val('dispatch_quote_handling')],
+        ['Min Quote Info', val('dispatch_quote_info')],
+      ]},
+      { title: 'Rates & Pricing', rows: [
+        ['Tow Rate Type', getRadio('rateTowType')],
+        ['Surcharge', getRadio('rateSurcharge')],
+        ['Tow Quote Script', val('rate_tow_script')],
+        ['Haul Rate Type', getRadio('rateHaulType')],
+        ['Permit Costs', getRadio('ratePermit')],
+        ['Payment Methods', getChecked('pay')],
+        ['Fleet Accounts', getRadio('rateFleet')],
+      ]},
+      { title: 'Compliance & Credentials', rows: [
+        ['USDOT', val('comp_dot')],
+        ['MC Number', val('comp_mc')],
+        ['State License', val('comp_state_lic')],
+        ['Insurance', val('comp_insurance')],
+        ['Permits', getRadio('compPermits')],
+        ['Pilot Cars', getRadio('compPilot')],
+        ['Operating States', val('comp_states')],
+        ['Hazmat', getRadio('compHazmat')],
+        ['Exclusions', val('comp_exclusions')],
+      ]},
+      { title: 'Escalation Logic', rows: [
+        ['Auto-Escalate Triggers', getChecked('esc')],
+        ['Emergency Number', val('esc_emergency_num')],
+        ['After-Hours Script', val('esc_after_hours_script')],
+        ['Direct Route Jobs', val('esc_route_direct')],
+      ]},
+      { title: 'Lead Definition & FAQs', rows: [
+        ['Ideal Lead', val('lead_ideal')],
+        ['Low-Priority Callers', val('lead_bad')],
+        ['Common FAQs', val('lead_faq')],
+        ['Capture Fields', getChecked('lcap')],
+        ['Additional Notes', val('lead_extra')],
+        ['Brand Voice', val('lead_voice')],
+      ]},
+    ];
+
+    let html = '';
+    sections.forEach(sec => {
+      html += `<div class="summary-box"><div class="summary-section-title">${sec.title}</div>`;
+      sec.rows.forEach(([k, v]) => {
+        html += `<div class="summary-row"><div class="summary-key">${k}</div><div class="summary-val">${v}</div></div>`;
+      });
+      html += `</div>`;
+    });
+
+    document.getElementById('summary-content').innerHTML = html;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
