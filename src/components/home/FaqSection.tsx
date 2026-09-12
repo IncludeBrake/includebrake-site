@@ -1,0 +1,18 @@
+import { Plus } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { SectionReveal } from "@/components/home/SectionReveal";
+
+const faqs = [
+  { q: "Do I have to replace my shop management or dispatch software?", a: "No. IncludeBrake is built to sit beside the systems you already run. We map the handoffs between tools and clean up the administrative loop. We do not rip out your stack or force a migration." },
+  { q: "What actually happens on the walkthrough?", a: "You describe the bottleneck slowing your floor or fleet. We ask targeted questions about intake, handoffs, and where data gets retyped. You leave with a clear read on whether a Blueprint or a Single Process Fix is the better next step." },
+  { q: "Do you need access to my systems?", a: "Only when a fix requires it, and only with your approval. Discovery usually starts from process walkthroughs with your people. If system access is needed later, scope and permissions are agreed in writing first." },
+  { q: "What changes for my staff day to day?", a: "The goal is less retyping and fewer stalled handoffs, not a new software learning curve. Your crew keeps the tools they know. The change is how information moves between those tools and who has to babysit it." },
+  { q: "What if the fix doesn't actually save time?", a: "We baseline the current process before we build. After a fix is live, we time it against that baseline. If the new method does not measurably outperform the old one, we do not push expansion work." },
+  { q: "Who owns what you build?", a: "You do. Documentation, maps, and any workflows we put in place live under your control. There is no proprietary lock-in and no closed ecosystem you have to rent forever." },
+  { q: "How long does the Blueprint take, and what does it cost?", a: "Timeline and scope depend on how many processes you want mapped and how many people touch them. We discuss that on the walkthrough against your operation. We do not quote a fixed package price on this page." },
+  { q: "Will this work with our specific systems?", a: "We assess compatibility against the tools you actually use rather than claiming certified integrations for every product. If a handoff can be made reliable without replacing software, that is the path we take." },
+];
+
+export function FaqSection() {
+  return <section id="faq" className="anchor-offset section-pad bg-zinc-100 py-28 text-black sm:py-36"><div className="content-width"><SectionReveal><p className="label-mono">10 / Straight answers</p><h2 className="mt-7 max-w-4xl font-sans text-[clamp(2.8rem,6vw,6.1rem)] font-extrabold leading-[0.91] tracking-[-0.07em]">Questions operators<br /><span className="text-black/[0.45]">actually ask.</span></h2></SectionReveal><SectionReveal delay={0.08}><div className="mt-16 border-t border-black/20"><Accordion type="single" collapsible className="w-full">{faqs.map((item, index) => <AccordionItem key={item.q} value={`faq-${index}`} className="border-black/[0.15]"><AccordionTrigger className="group gap-5 py-6 text-left text-base font-semibold tracking-[-0.02em] text-black hover:no-underline sm:py-7 sm:text-lg [&>svg:last-child]:hidden"><span className="flex flex-1 items-center justify-between gap-5"><span>{item.q}</span><Plus className="h-5 w-5 shrink-0 text-black/[0.45] transition-transform duration-200 group-data-[state=open]:rotate-45" aria-hidden /></span></AccordionTrigger><AccordionContent className="max-w-3xl pb-7 text-sm leading-relaxed text-black/[0.55] sm:text-base">{item.a}</AccordionContent></AccordionItem>)}</Accordion></div></SectionReveal></div></section>;
+}
