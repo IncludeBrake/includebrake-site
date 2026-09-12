@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /car-studio.html
+
+Sitemap: https://includebrake.com/sitemap.xml
