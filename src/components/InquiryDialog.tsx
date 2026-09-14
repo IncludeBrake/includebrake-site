@@ -1,7 +1,7 @@
 import { cloneElement, useEffect, useState, type FormEvent, type ReactElement } from "react";
 import { Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { contacts, events } from "@/integrations/core";
+import { submitInquiry } from "@/lib/api/inquiry";
 
 export type InquiryService = "" | "blueprint" | "process-fix" | "general";
 
@@ -66,17 +66,17 @@ export function InquiryDialog({ open, onOpenChange, defaultService = "" }: Inqui
     const { first_name, last_name } = splitName(form.name);
     const email = form.email.trim().toLowerCase();
     const serviceLabel = SERVICE_OPTIONS.find((service) => service.value === form.service)?.label || "General inquiry";
-    const tags = ["inquiry"];
-    if (form.service === "blueprint" || form.service === "process-fix") tags.push(form.service);
-    const notes = [`Service interest: ${serviceLabel}`, form.company.trim() ? `Company: ${form.company.trim()}` : null, `Bottleneck: ${form.bottleneck.trim()}`, "Source: IncludeBrake homepage inquiry"].filter(Boolean).join("\n");
 
     try {
-      await contacts({ email, first_name, ...(last_name ? { last_name } : {}), tags, contact_stage: "lead", source: "website-inquiry", append_notes: notes });
-      try {
-        await events({ event_name: "service_inquiry", contact_email: email, properties: { service: form.service || "general", company: form.company.trim() || null }, source: "website" });
-      } catch (eventError) {
-        console.error("Inquiry event logging failed:", eventError);
-      }
+      await submitInquiry({
+        firstname: first_name,
+        ...(last_name ? { lastname: last_name } : {}),
+        email,
+        company: form.company.trim(),
+        service: serviceLabel,
+        bottleneck: form.bottleneck.trim(),
+        source: "website-inquiry",
+      });
       setSuccess(true);
     } catch (error) {
       console.error("Failed to save inquiry:", error);
