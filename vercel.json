@@ -1,6 +1,15 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/includebrake-site", "destination": "/", "statusCode": 301 },
+    { "source": "/includebrake-site/:path*", "destination": "/", "statusCode": 301 },
+    { "source": "/blueprint.html", "destination": "/", "statusCode": 301 },
+    { "source": "/automation.html", "destination": "/", "statusCode": 301 },
+    { "source": "/our-stand.html", "destination": "/", "statusCode": 301 },
+    { "source": "/contact.html", "destination": "/", "statusCode": 301 },
+    { "source": "/car-studio.html", "destination": "/", "statusCode": 301 }
+  ],
   "rewrites": [
     { "source": "/chatbot", "destination": "/chatbot.html" },
     { "source": "/authority", "destination": "/authority.html" },
