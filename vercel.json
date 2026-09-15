@@ -2,7 +2,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/chatbot", "destination": "/chatbot.html" },
+    { "source": "/authority", "destination": "/authority.html" },
+    { "source": "/tractionbuild", "destination": "/tractionbuild.html" },
     { "source": "/validate", "destination": "/tractionbuild.html" },
+    { "source": "/intake", "destination": "/intake.html" },
     { "source": "/intake-tow", "destination": "/intake_tow.html" },
     { "source": "/((?!api/|assets/).*)", "destination": "/index.html" }
   ]
