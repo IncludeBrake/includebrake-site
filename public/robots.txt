@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Client intake forms — reachable by direct link, not for search results.
+Disallow: /intake
+Disallow: /intake-tow
+Disallow: /intake.html
+Disallow: /intake_tow.html
+
+# Serverless endpoints.
+Disallow: /api/
+
+Sitemap: https://www.includebrake.com/sitemap.xml
