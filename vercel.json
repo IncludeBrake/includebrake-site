@@ -2,6 +2,17 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/chatbot", "destination": "/", "statusCode": 301 },
+    { "source": "/chatbot.html", "destination": "/", "statusCode": 301 },
+    { "source": "/authority", "destination": "/", "statusCode": 301 },
+    { "source": "/authority.html", "destination": "/", "statusCode": 301 },
+    { "source": "/tractionbuild", "destination": "/", "statusCode": 301 },
+    { "source": "/tractionbuild.html", "destination": "/", "statusCode": 301 },
+    { "source": "/validate", "destination": "/", "statusCode": 301 },
+    { "source": "/intake", "destination": "/", "statusCode": 301 },
+    { "source": "/intake.html", "destination": "/", "statusCode": 301 },
+    { "source": "/intake-tow", "destination": "/", "statusCode": 301 },
+    { "source": "/intake_tow.html", "destination": "/", "statusCode": 301 },
     { "source": "/includebrake-site", "destination": "/", "statusCode": 301 },
     { "source": "/includebrake-site/:path*", "destination": "/", "statusCode": 301 },
     { "source": "/blueprint.html", "destination": "/", "statusCode": 301 },
@@ -11,12 +22,6 @@
     { "source": "/car-studio.html", "destination": "/", "statusCode": 301 }
   ],
   "rewrites": [
-    { "source": "/chatbot", "destination": "/chatbot.html" },
-    { "source": "/authority", "destination": "/authority.html" },
-    { "source": "/tractionbuild", "destination": "/tractionbuild.html" },
-    { "source": "/validate", "destination": "/tractionbuild.html" },
-    { "source": "/intake", "destination": "/intake.html" },
-    { "source": "/intake-tow", "destination": "/intake_tow.html" },
     { "source": "/((?!api/|assets/).*)", "destination": "/index.html" }
   ]
 }

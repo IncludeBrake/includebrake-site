@@ -1,13 +1,11 @@
 User-agent: *
 Allow: /
 
-# Client intake forms — reachable by direct link, not for search results.
-Disallow: /intake
-Disallow: /intake-tow
-Disallow: /intake.html
-Disallow: /intake_tow.html
-
 # Serverless endpoints.
 Disallow: /api/
+
+# Retired offers (chatbot, authority, tractionbuild, intake) are NOT listed
+# here on purpose: they 301 to /, and a crawler that is blocked from fetching
+# them never sees the redirect, which leaves the dead URLs in the index.
 
 Sitemap: https://www.includebrake.com/sitemap.xml
