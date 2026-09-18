@@ -1,10 +1,7 @@
 export const config = { runtime: 'edge' };
 
 const ALLOWED_ORIGINS = ['https://www.includebrake.com', 'https://includebrake.com'];
-
-function toBase64(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
+const FROM = 'IncludeBrake <support@em.includebrake.com>';
 
 function corsHeaders(origin) {
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -14,6 +11,12 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type'
   };
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
+  );
 }
 
 /**
@@ -38,7 +41,7 @@ async function createHubspotContact(base, message) {
 
   if (!res.ok && message) {
     const err = await res.clone().json().catch(() => ({}));
-    if (err.category === 'CONFLICT') return err;
+    if (err.category === 'CONFLICT') return;
     // Unknown/invalid property — retry without the optional field.
     res = await post(base);
   }
@@ -49,7 +52,17 @@ async function createHubspotContact(base, message) {
       throw new Error(err.message || 'HubSpot API error');
     }
   }
-  return null;
+}
+
+function sendEmail(payload) {
+  return fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`
+    },
+    body: JSON.stringify({ from: FROM, ...payload })
+  });
 }
 
 export default async function handler(req) {
@@ -75,7 +88,9 @@ export default async function handler(req) {
       });
     }
 
-    // 1. HubSpot contact creation
+    const fullName = `${firstname} ${lastname || ''}`.trim();
+
+    // 1. HubSpot contact creation — the actual lead capture. Fatal if it fails.
     const message = [
       service ? `Service interest: ${service}` : null,
       bottleneck ? `Bottleneck: ${bottleneck}` : null,
@@ -96,63 +111,61 @@ export default async function handler(req) {
       message || undefined
     );
 
-    // 2. Resend — confirmation email to lead
-    const resendRes = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`
-      },
-      body: JSON.stringify({
-        from: 'IncludeBrake <support@em.includebrake.com>',
+    // Everything below is notification. A notification failure must never cost
+    // a lead that HubSpot already accepted, so these are logged, not thrown.
+
+    // 2. Confirmation email to the lead.
+    try {
+      const res = await sendEmail({
         to: [email],
         subject: "You're on the list — IncludeBrake",
         html: `
-          <p>Hey ${firstname},</p>
+          <p>Hey ${escapeHtml(firstname)},</p>
           <p>Thanks for reaching out. We got your info and will be in touch within 24 hours.</p>
           <p>In the meantime, if you have any questions you can reply directly to this email.</p>
           <p>— Jes<br>IncludeBrake</p>
         `
-      })
-    });
-    if (!resendRes.ok) {
-      const resendErr = await resendRes.json().catch(() => ({}));
-      throw new Error(`Resend error: ${JSON.stringify(resendErr)}`);
-    }
-
-    // 3. Twilio — SMS alert to Jes
-    const twilioSid = process.env.TWILIO_ACCOUNT_SID;
-    const twilioAuth = process.env.TWILIO_AUTH_TOKEN;
-    const smsLines = [
-      'New IncludeBrake lead:',
-      `Name: ${firstname} ${lastname || ''}`.trim(),
-      `Email: ${email}`,
-      `Business: ${company || 'not provided'}`
-    ];
-    if (service) smsLines.push(`Interest: ${service}`);
-    if (bottleneck) {
-      const trimmed = bottleneck.length > 300 ? `${bottleneck.slice(0, 297)}...` : bottleneck;
-      smsLines.push(`Bottleneck: ${trimmed}`);
-    }
-
-    const twilioRes = await fetch(
-      `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: `Basic ${toBase64(`${twilioSid}:${twilioAuth}`)}`
-        },
-        body: new URLSearchParams({
-          From: process.env.TWILIO_FROM,
-          To: process.env.TWILIO_TO,
-          Body: smsLines.join('\n')
-        })
+      });
+      if (!res.ok) {
+        console.error('Resend (lead confirmation) failed:', await res.text().catch(() => ''));
       }
-    );
-    if (!twilioRes.ok) {
-      const twilioErr = await twilioRes.json().catch(() => ({}));
-      throw new Error(`Twilio error: ${JSON.stringify(twilioErr)}`);
+    } catch (err) {
+      console.error('Resend (lead confirmation) threw:', err.message);
+    }
+
+    // 3. Internal notification. Replaces the old Twilio SMS alert.
+    //    Set NOTIFY_EMAIL in the Vercel project to receive these.
+    const notify = process.env.NOTIFY_EMAIL;
+    if (notify) {
+      try {
+        const rows = [
+          ['Name', fullName],
+          ['Email', email],
+          ['Business', company || 'not provided'],
+          ['Interest', service || 'not specified'],
+          ['Source', source || 'not specified'],
+          ['Bottleneck', bottleneck || 'not provided']
+        ]
+          .map(
+            ([k, v]) =>
+              `<tr><td style="padding:4px 12px 4px 0;vertical-align:top;"><strong>${k}</strong></td><td style="padding:4px 0;">${escapeHtml(v)}</td></tr>`
+          )
+          .join('');
+
+        const res = await sendEmail({
+          to: [notify],
+          reply_to: email,
+          subject: `New IncludeBrake lead: ${fullName}`,
+          html: `<p>New inquiry from the website.</p><table>${rows}</table>`
+        });
+        if (!res.ok) {
+          console.error('Resend (internal notification) failed:', await res.text().catch(() => ''));
+        }
+      } catch (err) {
+        console.error('Resend (internal notification) threw:', err.message);
+      }
+    } else {
+      console.error('NOTIFY_EMAIL is not set — no internal lead notification sent.');
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
