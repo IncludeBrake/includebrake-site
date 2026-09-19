@@ -42,6 +42,7 @@ const industries = [
   { title: "Heavy Haul & Specialized Freight", body: "State permit coordination, route survey filing, pilot car billing, and driver manifest packets." },
   { title: "Collision & Auto Body", body: "Repair order supplements, adjuster photo documentation, parts verification, and claim sign-offs." },
   { title: "Commercial Fleet & Auto Repair", body: "Bay check-in, technician diagnostic notes, customer approval chains, and final invoicing." },
+  { title: "Equipment Rental & Yard Operations", body: "Reservation holds, delivery and pickup tickets, check-in condition photos, and meter-hour billing reconciliation." },
 ];
 
 type Props = { onInquire: (service?: InquiryService) => void };
@@ -166,7 +167,7 @@ export function MidPrimarySections({ onInquire }: Props) {
             <div className="editorial-heading-grid">
               <div>
                 <p className="label-mono">04 / Industry focus</p>
-                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-black/50">Four trades. The same underlying problem in four different shapes.</p>
+                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-black/50">Five trades. The same underlying problem in five different shapes.</p>
               </div>
               <div>
                 <h2 className="display-heading">Built for operators<br /><span className="text-black/[0.45]">who run heavy equipment.</span></h2>
@@ -174,7 +175,7 @@ export function MidPrimarySections({ onInquire }: Props) {
             </div>
           </SectionReveal>
 
-          <div className="mt-20 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {industries.map((item, index) => (
               <SectionReveal key={item.title} delay={index * 0.06}>
                 <article className="group flex min-h-[310px] flex-col justify-between rounded-[1.3rem] border border-black/[0.15] bg-white p-6 transition-colors duration-300 hover:bg-black hover:text-white sm:p-7">

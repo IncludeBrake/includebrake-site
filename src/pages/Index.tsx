@@ -27,6 +27,7 @@ const STRIP_ITEMS = [
   "Heavy haul & specialized freight",
   "Collision & auto body",
   "Commercial fleet & auto repair",
+  "Equipment rental & yard operations",
   "Keep your existing software",
 ];
 
