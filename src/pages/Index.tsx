@@ -99,7 +99,7 @@ export default function Index() {
                     onClick={() => openInquiry()}
                     className="pill-button inline-flex h-12 items-center justify-center gap-3 bg-white px-6 text-sm font-bold text-black transition hover:bg-white/[0.84]"
                   >
-                    Talk through the bottleneck
+                    Send your worst process
                     <span className="button-arrow" aria-hidden>↗</span>
                   </button>
                   <a
@@ -110,7 +110,7 @@ export default function Index() {
                   </a>
                 </div>
                 <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.13em] text-white/[0.34] sm:text-[11px]">
-                  No software migrations. No disruption to active bays or trucks.
+                  No call required. No software migrations. No disruption to active bays or trucks.
                 </p>
               </motion.div>
             </div>
@@ -200,13 +200,13 @@ function Header({
             </a>
           ))}
           <button type="button" onClick={onInquire} className="pill-button inline-flex h-11 items-center justify-center bg-white px-5 text-[12px] font-bold text-black transition hover:bg-white/[0.84]">
-            Let&apos;s talk
+            Send your worst process
           </button>
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
           <button type="button" onClick={onInquire} className="pill-button inline-flex h-10 items-center justify-center bg-white px-4 text-xs font-bold text-black transition hover:bg-white/[0.84]">
-            Let&apos;s talk
+            Send a process
           </button>
           <button type="button" aria-expanded={menuOpen} aria-controls="mobile-nav" aria-label={menuOpen ? "Close navigation" : "Open navigation"} onClick={onMenuToggle} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition hover:border-white/60">
             {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}

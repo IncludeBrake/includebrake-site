@@ -152,7 +152,7 @@ export function MidPrimarySections({ onInquire }: Props) {
                     </div>
                   </div>
                   <button type="button" onClick={() => onInquire(service.value)} className={`pill-button mt-10 inline-flex h-11 w-fit items-center gap-3 px-5 text-sm font-bold transition ${index === 0 ? "bg-black text-white hover:bg-black/80" : "bg-white text-black hover:bg-white/[0.85]"}`}>
-                    Talk through this service <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                    Send a process for this <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                   </button>
                 </article>
               </SectionReveal>
