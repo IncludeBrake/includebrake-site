@@ -19,8 +19,50 @@ function escapeHtml(s) {
   );
 }
 
+const HUBSPOT_CONTACTS = 'https://api.hubapi.com/crm/v3/objects/contacts';
+
+function hubspot(url, init = {}) {
+  return fetch(url, {
+    ...init,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`
+    }
+  });
+}
+
 /**
- * Creates the HubSpot contact.
+ * A returning prospect (same email) gets a CONFLICT on create. Their new
+ * submission is added to the existing contact's `message`, newest first, so
+ * neither the original nor the new bottleneck text is lost.
+ *
+ * Only `message` is touched — a returning lead must not have lifecycle stage or
+ * lead status reset. Failures are logged, not thrown: the contact already
+ * exists, and the internal notification email still carries the new text.
+ */
+async function appendHubspotMessage(email, message) {
+  const url = `${HUBSPOT_CONTACTS}/${encodeURIComponent(email)}?idProperty=email`;
+
+  const read = await hubspot(`${url}&properties=message`);
+  if (!read.ok) {
+    // Without the prior value, a PATCH would overwrite it. Leave it alone.
+    console.error('HubSpot (read existing contact) failed:', await read.text().catch(() => ''));
+    return;
+  }
+  const prior = (await read.json().catch(() => ({})))?.properties?.message;
+
+  const entry = `[${new Date().toISOString().slice(0, 10)}]\n${message}`;
+  const res = await hubspot(url, {
+    method: 'PATCH',
+    body: JSON.stringify({ properties: { message: prior ? `${entry}\n\n${prior}` : entry } })
+  });
+  if (!res.ok) {
+    console.error('HubSpot (append to existing contact) failed:', await res.text().catch(() => ''));
+  }
+}
+
+/**
+ * Creates the HubSpot contact, or appends to it if the email already exists.
  *
  * `message` is attempted first so the bottleneck text lands in the CRM, but a
  * property rejection must never cost us the lead — on a property error we retry
@@ -28,20 +70,13 @@ function escapeHtml(s) {
  */
 async function createHubspotContact(base, message) {
   const post = (properties) =>
-    fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`
-      },
-      body: JSON.stringify({ properties })
-    });
+    hubspot(HUBSPOT_CONTACTS, { method: 'POST', body: JSON.stringify({ properties }) });
 
   let res = await post(message ? { ...base, message } : base);
 
   if (!res.ok && message) {
     const err = await res.clone().json().catch(() => ({}));
-    if (err.category === 'CONFLICT') return;
+    if (err.category === 'CONFLICT') return appendHubspotMessage(base.email, message);
     // Unknown/invalid property — retry without the optional field.
     res = await post(base);
   }
