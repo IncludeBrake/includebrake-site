@@ -16,10 +16,10 @@ const HERO_LOGO_URL =
   "https://ellprnxjjzatijdxcogk.supabase.co/storage/v1/render/image/public/files/chat-generated-images/project-ltyoebekwsuiki71jba7/d5358079-e17d-4139-a21f-c883fafffb87.png?width=720&resize=contain&quality=75";
 
 const NAV = [
-  { href: "#workflows", label: "Workflows" },
-  { href: "#services", label: "Services" },
-  { href: "#approach", label: "Approach" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#workflows", label: "The problems" },
+  { href: "#services", label: "What I fix" },
+  { href: "#approach", label: "How I work" },
+  { href: "#faq", label: "Questions" },
 ];
 
 const STRIP_ITEMS = [
@@ -28,7 +28,7 @@ const STRIP_ITEMS = [
   "Collision & auto body",
   "Commercial fleet & auto repair",
   "Equipment rental & yard operations",
-  "Keep your existing software",
+  "Keep your software",
 ];
 
 export default function Index() {
@@ -64,7 +64,7 @@ export default function Index() {
           <div className="hero-grid" aria-hidden />
           <div className="content-width relative flex min-h-[calc(100svh-4.5rem)] flex-col justify-between section-pad pb-8 pt-20 sm:pb-10 sm:pt-28 lg:pt-32">
             <div className="relative z-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-white/[0.42] sm:text-[11px]">
-              <span>IncludeBrake / operational clarity</span>
+              <span>IncludeBrake / from done to paid</span>
               <span>01 / 04</span>
             </div>
 
@@ -75,11 +75,9 @@ export default function Index() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
               >
-                Remove the
+                The Job's Done.
                 <br />
-                <span className="text-white/[0.52]">Bottleneck.</span>
-                <br />
-                Keep Your Software.
+                <span className="text-white/[0.52]">Why Isn't the Invoice?</span>
               </motion.h1>
 
               <motion.div
@@ -89,9 +87,8 @@ export default function Index() {
                 transition={{ duration: 0.62, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               >
                 <p className="text-[15px] leading-relaxed text-white/[0.66] sm:text-lg sm:leading-relaxed">
-                  We find the single administrative loop slowing down your shop floor or fleet.
-                  Then we build a clean bridge across the tools you already use, keep your crew
-                  in control, and measure the hours saved.
+                  Keep your software. I clear the paperwork between the field and the desk.
+                  Then I time it, before and after.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <button
@@ -106,11 +103,11 @@ export default function Index() {
                     href="#services"
                     className="pill-button inline-flex h-12 items-center justify-center border border-white/25 px-6 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/10"
                   >
-                    See the two ways we work
+                    See what I fix
                   </a>
                 </div>
                 <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.13em] text-white/[0.34] sm:text-[11px]">
-                  No call required. No software migrations. No disruption to active bays or trucks.
+                  No call. No new software. No downtime in the bays or on the trucks.
                 </p>
               </motion.div>
             </div>
@@ -122,13 +119,13 @@ export default function Index() {
               transition={{ duration: 0.6, delay: 0.34 }}
             >
               <span className="max-w-[230px] text-xs leading-relaxed text-white/[0.44]">
-                Administrative drag lives between the field and the desk.
+                Jobs get stuck between the field and the desk.
               </span>
               <a
                 href="#workflows"
                 className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-white/[0.66] transition hover:text-white"
               >
-                Find the drag
+                Where jobs get stuck
                 <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" aria-hidden />
               </a>
             </motion.div>

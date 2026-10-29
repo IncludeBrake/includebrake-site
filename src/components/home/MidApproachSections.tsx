@@ -5,30 +5,30 @@ import { SectionReveal } from "@/components/home/SectionReveal";
 
 const baselineBefore = [
   "Ticket written in the field",
-  "Retyped into dispatch",
-  "Retyped into invoicing",
-  "Retyped into accounting",
-  "Errors caught at customer dispute",
+  "Typed into dispatch",
+  "Typed again into billing",
+  "Typed again into the books",
+  "Mistakes found when the customer disputes it",
 ];
 
 const baselineAfter = [
   "Ticket written in the field",
-  "Details carried across, once",
+  "Info carried over once",
   "Anything unclear is flagged for a person",
-  "Your staff confirm and release",
-  "Same clock, run again, compared",
+  "Your staff confirm and release it",
+  "Same clock, timed again, compared",
 ];
 
 const approachSteps = [
-  { label: "Record the current clock", body: "Before we build, we record how long your current process takes by the clock." },
-  { label: "Build across the tools", body: "We build a clean bridge across the screens your team already uses, with people in control of the handoff." },
-  { label: "Run the same process again", body: "After the fix is live, we time it again and compare it to the baseline before discussing expansion work." },
+  { label: "Time it today", body: "Before I build anything, I time the job the way your people run it now." },
+  { label: "Fix it on your tools", body: "I connect the screens your team already uses. Your people still confirm every handoff." },
+  { label: "Time it again", body: "Once the fix is live, I time it again and show you both numbers. Then you decide what's next." },
 ];
 
 const statements = [
-  { label: "01 / For the floor", title: "Calm at the handoff.", body: "The work should move from field to desk without a second round of retyping or a new software learning curve." },
-  { label: "02 / For the team", title: "Clear for the crew.", body: "Your staff confirm and release the work. The change removes repetitive administrative clutter from their desks." },
-  { label: "03 / For the operator", title: "Yours when we leave.", body: "You retain every map, script, file, and decision. If you manage the process internally tomorrow, you have what you need." },
+  { label: "01 / The bay", title: "Grew up in a body shop.", body: "I worked in a frame and body shop as a detailer and shop assistant through 2008. I know how a repair moves through a shop." },
+  { label: "02 / The field", title: "Field inspections for years.", body: "I do field inspections for insurance and asset companies: the condition photos and reports they rely on." },
+  { label: "03 / The road", title: "Years around towing and heavy haul.", body: "I've watched the paperwork pile up after the truck gets home. That's where I learned to build the fixes." },
 ];
 
 export function MidApproachSections() {
@@ -46,8 +46,8 @@ export function MidApproachSections() {
         <div className="content-width">
           <SectionReveal>
             <div className="editorial-heading-grid">
-              <div><p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-white/[0.45]">05 / About the approach</p><p className="mt-8 max-w-[220px] text-sm leading-relaxed text-white/[0.45]">A small, measurable change that keeps the operation yours.</p></div>
-              <div><h2 className="display-heading text-white">The Baseline Rule:<br /><span className="text-white/[0.45]">We Measure Before We Build.</span></h2><p className="mt-9 max-w-2xl text-base leading-relaxed text-white/[0.58] sm:text-lg">We work from evidence, not theories. You maintain full oversight at every step, and the same clock tells us whether the new method is worth carrying forward.</p></div>
+              <div><p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-white/[0.45]">05 / Here's how I work</p><p className="mt-8 max-w-[220px] text-sm leading-relaxed text-white/[0.45]">One small change, timed, and yours to keep.</p></div>
+              <div><h2 className="display-heading text-white">Time It First.<br /><span className="text-white/[0.45]">Then Fix It.</span></h2><p className="mt-9 max-w-2xl text-base leading-relaxed text-white/[0.58] sm:text-lg">I don't guess. I time the job as it runs today. The same clock decides if the fix is worth keeping.</p></div>
             </div>
           </SectionReveal>
 
@@ -69,22 +69,22 @@ export function MidApproachSections() {
 
           <SectionReveal delay={0.1}>
             <div className="mt-20 rounded-[1.5rem] border border-white/[0.15] bg-white/[0.045] p-5 sm:p-8 lg:p-10">
-              <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-7 sm:flex-row sm:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">Method / recorded first, measured after</p><h3 className="mt-4 max-w-2xl text-2xl font-bold tracking-[-0.05em] sm:text-4xl">The same process, two clear readings.</h3></div><p className="max-w-xs text-sm leading-relaxed text-white/[0.45]">If the new method does not measurably outperform the old one, we do not push expansion work.</p></div>
+              <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-7 sm:flex-row sm:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">Example / timed first, timed after</p><h3 className="mt-4 max-w-2xl text-2xl font-bold tracking-[-0.05em] sm:text-4xl">Same job. Two times on the clock.</h3></div><p className="max-w-xs text-sm leading-relaxed text-white/[0.45]">If the fix doesn't beat the old way by the clock, I don't push more work.</p></div>
               <div className="mt-8 grid gap-4 md:grid-cols-2"><ProcessList label="Baseline / recorded first" items={baselineBefore} /><ProcessList label="After / measured against it" items={baselineAfter} inverse /></div>
-              <p className="mt-6 text-xs leading-relaxed text-white/[0.35]">Illustration of the method. Your actual baseline is recorded in your shop, from your own process.</p>
+              <p className="mt-6 text-xs leading-relaxed text-white/[0.35]">This is an example of the method. Your real numbers come from your shop and your own process.</p>
             </div>
           </SectionReveal>
 
           <div className="mt-28 grid gap-10 border-t border-white/[0.15] pt-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:pt-16">
             <SectionReveal><div><p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-white/[0.45]">Ownership / always</p><h2 className="mt-7 max-w-xl font-sans text-[clamp(2.8rem,6vw,6rem)] font-extrabold leading-[0.91] tracking-[-0.07em]">You hold the keys.<br /><span className="text-white/[0.45]">Always.</span></h2></div></SectionReveal>
-            <SectionReveal delay={0.08}><div className="lg:pt-16"><p className="max-w-2xl text-xl leading-relaxed tracking-[-0.02em] text-white/[0.65] sm:text-2xl">Everything we build lives on your infrastructure, accessible via clear, plain-language documentation. No proprietary lock-in. No closed ecosystems.</p><p className="mt-7 max-w-xl text-sm leading-relaxed text-white/[0.45] sm:text-base">If you choose to manage the process internally tomorrow, you retain every script, map, and file without restriction.</p></div></SectionReveal>
+            <SectionReveal delay={0.08}><div className="lg:pt-16"><p className="max-w-2xl text-xl leading-relaxed tracking-[-0.02em] text-white/[0.65] sm:text-2xl">Everything I build lives on your computers, with plain-English instructions. No lock-in. Nothing you have to rent.</p><p className="mt-7 max-w-xl text-sm leading-relaxed text-white/[0.45] sm:text-base">If you take it in-house tomorrow, you keep every script, map and file.</p></div></SectionReveal>
           </div>
         </div>
       </section>
 
       <section id="experiences" className="anchor-offset section-pad bg-white py-28 text-black sm:py-36">
         <div className="content-width">
-          <SectionReveal><div className="editorial-heading-grid"><p className="label-mono">06 / What the work should feel like</p><div><h2 className="display-heading">Questions have<br /><span className="text-black/[0.45]">practical answers.</span></h2><p className="body-copy mt-9 max-w-2xl">There are no invented testimonials here. These are the standards the work is built around, from the first walkthrough to the handoff.</p></div></div></SectionReveal>
+          <SectionReveal><div className="editorial-heading-grid"><p className="label-mono">06 / Why me</p><div><h2 className="display-heading">I know your yard<br /><span className="text-black/[0.45]">because I've stood in one.</span></h2><p className="body-copy mt-9 max-w-2xl">No made-up reviews here. My first case study is coming. Until then, here's where I learned this work.</p></div></div></SectionReveal>
           <div className="mt-20 grid gap-4 lg:grid-cols-3">
             {statements.map((item, index) => <SectionReveal key={item.title} delay={index * 0.08}><article className="flex min-h-[320px] flex-col justify-between rounded-[1.35rem] border border-black/[0.15] p-6 sm:p-8"><div className="flex items-center justify-between"><span className="font-mono text-[10px] uppercase tracking-[0.15em] text-black/[0.45]">{item.label}</span><Check className="h-4 w-4 text-black/[0.35]" aria-hidden /></div><div><h3 className="text-3xl font-bold leading-[0.96] tracking-[-0.06em]">{item.title}</h3><p className="mt-5 text-sm leading-relaxed text-black/[0.55] sm:text-base">{item.body}</p></div></article></SectionReveal>)}
           </div>
@@ -93,8 +93,8 @@ export function MidApproachSections() {
 
       <section ref={methodRef} id="method" className="anchor-offset section-pad bg-zinc-100 py-28 text-black sm:py-36">
         <div className="content-width">
-          <SectionReveal><div className="flex flex-col justify-between gap-8 border-b border-black/[0.15] pb-10 md:flex-row md:items-end"><div><p className="label-mono">07 / Method illustration</p><h2 className="mt-7 max-w-4xl font-sans text-[clamp(2.8rem,6vw,6rem)] font-extrabold leading-[0.91] tracking-[-0.07em]">Compare the same clock.</h2></div><p className="max-w-sm text-sm leading-relaxed text-black/[0.55]">A visual explanation of how IncludeBrake looks for a measurable change, not a client result or a promised outcome.</p></div></SectionReveal>
-          <SectionReveal delay={0.08}><div className="method-card relative mt-12 overflow-hidden rounded-[1.6rem] bg-black p-6 text-white sm:p-10 lg:p-14"><motion.div className="method-scan" style={{ scaleX: reduce ? 1 : scanScale }} aria-hidden /><div className="flex flex-col justify-between gap-8 border-b border-white/[0.15] pb-8 sm:flex-row sm:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">Illustration / no fabricated result</p><h3 className="mt-4 max-w-2xl text-3xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-5xl">Same workflow.<br /><span className="text-white/[0.45]">Clearer handoff.</span></h3></div><ArrowRight className="h-6 w-6 text-white/[0.45]" aria-hidden /></div><div className="method-grid mt-10"><MethodColumn label="Before / recorded baseline" items={baselineBefore} /><div className="hidden items-center justify-center md:flex" aria-hidden><Minus className="h-5 w-5 text-white/40" /></div><MethodColumn label="After / measured against it" items={baselineAfter} inverse /></div><p className="mt-8 max-w-2xl text-xs leading-relaxed text-white/[0.35]">The actual comparison uses your own process, your own people, and your own clock. IncludeBrake does not publish a result before doing that work.</p></div></SectionReveal>
+          <SectionReveal><div className="flex flex-col justify-between gap-8 border-b border-black/[0.15] pb-10 md:flex-row md:items-end"><div><p className="label-mono">07 / Example, not a result</p><h2 className="mt-7 max-w-4xl font-sans text-[clamp(2.8rem,6vw,6rem)] font-extrabold leading-[0.91] tracking-[-0.07em]">Same job. Same clock.</h2></div><p className="max-w-sm text-sm leading-relaxed text-black/[0.55]">This shows how I measure a fix. It's not a client result or a promise.</p></div></SectionReveal>
+          <SectionReveal delay={0.08}><div className="method-card relative mt-12 overflow-hidden rounded-[1.6rem] bg-black p-6 text-white sm:p-10 lg:p-14"><motion.div className="method-scan" style={{ scaleX: reduce ? 1 : scanScale }} aria-hidden /><div className="flex flex-col justify-between gap-8 border-b border-white/[0.15] pb-8 sm:flex-row sm:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">Example / no made-up numbers</p><h3 className="mt-4 max-w-2xl text-3xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-5xl">Same job.<br /><span className="text-white/[0.45]">Cleaner handoff.</span></h3></div><ArrowRight className="h-6 w-6 text-white/[0.45]" aria-hidden /></div><div className="method-grid mt-10"><MethodColumn label="Before / recorded baseline" items={baselineBefore} /><div className="hidden items-center justify-center md:flex" aria-hidden><Minus className="h-5 w-5 text-white/40" /></div><MethodColumn label="After / measured against it" items={baselineAfter} inverse /></div><p className="mt-8 max-w-2xl text-xs leading-relaxed text-white/[0.35]">The real comparison uses your process, your people and your clock. I don't publish a result until that work is done.</p></div></SectionReveal>
         </div>
       </section>
     </>

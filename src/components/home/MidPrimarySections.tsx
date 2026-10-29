@@ -6,43 +6,43 @@ const MARK_URL =
   "https://ellprnxjjzatijdxcogk.supabase.co/storage/v1/render/image/public/files/chat-generated-images/project-ltyoebekwsuiki71jba7/d5358079-e17d-4139-a21f-c883fafffb87.png?width=420&resize=contain&quality=75";
 
 const bottlenecks = [
-  { title: "The Dual-Entry Tax", body: "The same ticket details get retyped into dispatch, then invoicing, then your accounting software." },
-  { title: "The Dead Quote", body: "An estimate sits on a counter for two days because only one person knows how to price the specialty work." },
-  { title: "The Missing Handoff", body: "Notes scribbled at 2:00 AM on a tow hook do not reach billing until the customer disputes the line item." },
-  { title: "The Regulatory Drag", body: "A heavy-haul driver sits idling at a state line waiting on a permit clearance that lived in someone’s unread inbox." },
+  { title: "Typing the same ticket three times", body: "Dispatch, then billing, then the books. Every retype is a chance to get it wrong." },
+  { title: "The estimate that sat until they went elsewhere", body: "The quote waits on the one person who can price it. By the time it goes out, the customer's gone." },
+  { title: "What the tech knew never made the invoice", body: "Driver notes, tech notes, the off-rent call. The office hears about it when the customer disputes the bill." },
+  { title: "Photos on a driver's phone", body: "The damage photos and times exist somewhere. Just not on the ticket when the claim comes in." },
 ];
 
 const principles = [
-  { title: "No software migration", body: "IncludeBrake builds a clean bridge across the tools you already use. Your shop management and dispatch systems stay in place.", label: "The existing stack stays" },
-  { title: "Baseline before build", body: "We record how long the current process takes by the clock, then run the same process again after the fix to compare it.", label: "Evidence, not theories" },
-  { title: "Operators keep the keys", body: "Your staff confirm and release the work. Documentation, maps, scripts, and files remain under your control.", label: "Full oversight" },
+  { title: "No new software", body: "Your shop and dispatch software stay in place. I make the tools you already run talk to each other.", label: "Your software stays" },
+  { title: "Timed before and after", body: "I time the job the way it runs today. After the fix, I time it again and show you both.", label: "By the clock" },
+  { title: "Your crew keeps the keys", body: "Your staff confirm and release the work. Anything unclear gets flagged for a person. The docs, maps, scripts and files are yours.", label: "Your call, every time" },
 ];
 
 const services = [
   {
     number: "01",
     title: "The Blueprint & Operating Map",
-    lead: "You feel the drag across the entire business, but you cannot afford downtime to hunt down every single leak.",
-    body: "We spend time with your dispatchers, service writers, and drivers. We document every step from intake to cash collection. You receive a permanent operating map you own, plus an objective priority list of what to streamline first.",
+    lead: "Jobs get stuck in more than one place, and you can't shut down to find every one.",
+    body: "I sit with your dispatchers, service writers and drivers. I write down every step from the first call to the payment. You get an operating map you own, plus a list of what to fix first.",
     tags: ["intake", "dispatch", "handoffs", "invoicing"],
     value: "blueprint" as InquiryService,
   },
   {
     number: "02",
     title: "The Single Process Fix",
-    lead: "You already know the exact paperwork bottleneck draining your week.",
-    body: "We map that specific task, build a reliable link between your existing screens, and route clean data to your staff. If the new workflow does not verifiably cut turnaround time against your current baseline, we do not expand it.",
-    tags: ["one bottleneck", "handoffs", "baseline", "existing tools"],
+    lead: "You already know the one paperwork problem eating your week.",
+    body: "I map that one task, connect the screens you already use, and get clean info to your staff. If it doesn't beat today's time by the clock, I don't push you to expand it.",
+    tags: ["one stuck point", "handoffs", "timed before and after", "your software"],
     value: "process-fix" as InquiryService,
   },
 ];
 
 const industries = [
-  { title: "Heavy-Duty Towing & Recovery", body: "Call intake, dispatch logs, impound release paperwork, and commercial billing reconciliation." },
-  { title: "Heavy Haul & Specialized Freight", body: "State permit coordination, route survey filing, pilot car billing, and driver manifest packets." },
-  { title: "Collision & Auto Body", body: "Repair order supplements, adjuster photo documentation, parts verification, and claim sign-offs." },
-  { title: "Commercial Fleet & Auto Repair", body: "Bay check-in, technician diagnostic notes, customer approval chains, and final invoicing." },
-  { title: "Equipment Rental & Yard Operations", body: "Reservation holds, delivery and pickup tickets, check-in condition photos, and meter-hour billing reconciliation." },
+  { title: "Heavy-Duty Towing & Recovery", body: "The truck's back. The invoice isn't. Your math: heavy jobs billed late each month × average ticket = cash you're floating." },
+  { title: "Heavy Haul & Specialized Freight", body: "The load's chained down. The paperwork isn't. Your math: idle days a month × truck and driver cost per day." },
+  { title: "Collision & Auto Body", body: "The car's torn down. The supplement's still waiting. Your math: extra days per repair × repairs a month = bay-days lost." },
+  { title: "Commercial Fleet & Auto Repair", body: "Your tech found it. The customer never heard. Your math: stalled quotes a week × average ticket = work diagnosed for free." },
+  { title: "Equipment Rental & Yard Operations", body: "It came back with a dent and extra hours. Your math: unbilled hours × hourly rate + damage you ate." },
 ];
 
 type Props = { onInquire: (service?: InquiryService) => void };
@@ -55,12 +55,12 @@ export function MidPrimarySections({ onInquire }: Props) {
           <SectionReveal>
             <div className="editorial-heading-grid">
               <div>
-                <p className="label-mono">01 / Workflows</p>
-                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-black/50">The floor keeps moving. The paperwork builds up in the gaps.</p>
+                <p className="label-mono">01 / Sound familiar?</p>
+                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-black/50">The bays keep moving. The paperwork piles up behind them.</p>
               </div>
               <div>
                 <h2 className="display-heading max-w-5xl">The Work Gets Done.<br /><span className="text-black/[0.45]">The Paperwork Stalls.</span></h2>
-                <p className="body-copy mt-9 max-w-2xl">You do not lose time turning wrenches or moving loads. You lose it in the gap between the field and the desk. These are the familiar loops that turn a finished job into unfinished administration.</p>
+                <p className="body-copy mt-9 max-w-2xl">You don't lose time turning wrenches or moving loads. You lose it between the field and the desk. Here's where it shows up in all five trades.</p>
               </div>
             </div>
           </SectionReveal>
@@ -71,7 +71,7 @@ export function MidPrimarySections({ onInquire }: Props) {
                 <article className="group workflow-card overflow-hidden rounded-[1.45rem] border border-black/10 bg-white">
                   <div className={`workflow-card-surface workflow-surface-${index}`}>
                     <div className="relative z-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.15em] text-black/[0.45]">
-                      <span>0{index + 1} / workflow</span>
+                      <span>0{index + 1} / stuck point</span>
                       <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" aria-hidden />
                     </div>
                     {index === 2 ? <img src={MARK_URL} alt="" width={180} height={140} className="workflow-mark" aria-hidden /> : null}
@@ -92,10 +92,10 @@ export function MidPrimarySections({ onInquire }: Props) {
         <div className="content-width">
           <SectionReveal>
             <div className="editorial-heading-grid">
-              <p className="label-mono">02 / Why IncludeBrake</p>
+              <p className="label-mono">02 / How I work</p>
               <div>
                 <h2 className="display-heading max-w-4xl">Clear work.<br /><span className="text-black/[0.45]">Clean handoffs.</span></h2>
-                <p className="body-copy mt-9 max-w-2xl">No fluff. We work from the process your people actually run, keep decision-making visible, and make the change small enough to use on a live floor.</p>
+                <p className="body-copy mt-9 max-w-2xl">I work from the process your people actually run. Every decision stays visible. Every change is small enough to use on a live floor.</p>
               </div>
             </div>
           </SectionReveal>
@@ -125,12 +125,12 @@ export function MidPrimarySections({ onInquire }: Props) {
           <SectionReveal>
             <div className="editorial-heading-grid">
               <div>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-white/[0.45]">03 / Services</p>
-                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-white/[0.45]">Clean operational documentation first, or a targeted fix for one known leak.</p>
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-white/[0.45]">03 / What I fix</p>
+                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-white/[0.45]">The whole job flow mapped, or one stuck point fixed.</p>
               </div>
               <div>
-                <h2 className="display-heading text-white">Two ways to<br /><span className="text-white/[0.45]">clear the drag.</span></h2>
-                <p className="mt-9 max-w-2xl text-base leading-relaxed text-white/[0.55] sm:text-lg">Start with a permanent view of the operation, or target the one process you already know is leaking time.</p>
+                <h2 className="display-heading text-white">Two ways<br /><span className="text-white/[0.45]">I fix it.</span></h2>
+                <p className="mt-9 max-w-2xl text-base leading-relaxed text-white/[0.55] sm:text-lg">Map the whole job from call to check, or fix the one spot you already know is costing you.</p>
               </div>
             </div>
           </SectionReveal>
@@ -166,11 +166,11 @@ export function MidPrimarySections({ onInquire }: Props) {
           <SectionReveal>
             <div className="editorial-heading-grid">
               <div>
-                <p className="label-mono">04 / Industry focus</p>
-                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-black/50">Five trades. The same underlying problem in five different shapes.</p>
+                <p className="label-mono">04 / Who I work with</p>
+                <p className="mt-8 max-w-[220px] text-sm leading-relaxed text-black/50">Five trades. Same four problems. Do your own math.</p>
               </div>
               <div>
-                <h2 className="display-heading">Built for operators<br /><span className="text-black/[0.45]">who run heavy equipment.</span></h2>
+                <h2 className="display-heading">Built for the yard,<br /><span className="text-black/[0.45]">the bay, and the road.</span></h2>
               </div>
             </div>
           </SectionReveal>
@@ -179,7 +179,7 @@ export function MidPrimarySections({ onInquire }: Props) {
             {industries.map((item, index) => (
               <SectionReveal key={item.title} delay={index * 0.06}>
                 <article className="group flex min-h-[310px] flex-col justify-between rounded-[1.3rem] border border-black/[0.15] bg-white p-6 transition-colors duration-300 hover:bg-black hover:text-white sm:p-7">
-                  <div className="flex items-center justify-between"><span className="font-mono text-[10px] uppercase tracking-[0.15em] text-black/[0.45] transition-colors group-hover:text-white/[0.45]">0{index + 1} / focus</span><ArrowUpRight className="h-4 w-4 text-black/[0.35] transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white/60" aria-hidden /></div>
+                  <div className="flex items-center justify-between"><span className="font-mono text-[10px] uppercase tracking-[0.15em] text-black/[0.45] transition-colors group-hover:text-white/[0.45]">0{index + 1} / trade</span><ArrowUpRight className="h-4 w-4 text-black/[0.35] transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white/60" aria-hidden /></div>
                   <div><h3 className="text-2xl font-bold leading-[0.98] tracking-[-0.055em]">{item.title}</h3><p className="mt-5 text-sm leading-relaxed text-black/[0.55] transition-colors group-hover:text-white/60">{item.body}</p></div>
                 </article>
               </SectionReveal>
